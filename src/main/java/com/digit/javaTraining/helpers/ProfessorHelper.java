@@ -10,7 +10,7 @@ public class ProfessorHelper {
 		System.out.println("Enter the name of the Professor");
 		String name = sc.next();
 		System.out.println("Enter the Password");
-//		String pass = sc.
+//		String pass = sc.sdf
 		
 	}
 }
