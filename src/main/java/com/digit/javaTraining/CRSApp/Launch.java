@@ -7,6 +7,7 @@ public class Launch {
 		System.out.println("Welcome to Digital Courses!");
 		System.out.println();
 		
+		Admin ad = new Admin();
 
 	}
 	
@@ -20,12 +21,14 @@ public class Launch {
 		
 	}
 	
-	static void mainMenu() {
+	static void mainMenu(Admin ad) {
 		Scanner sc = new Scanner(System.in);
 		printMainMenu();
 		System.out.println("Select an option: ");
 		int userInput = sc.nextInt();
-		
+		if(userInput==1) {
+			boolean isAuth = ad.checkUsernamePassword();
+		}
 		
 	}
 }
