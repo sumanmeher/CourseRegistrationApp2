@@ -1,5 +1,5 @@
 package com.digit.javaTraining.CRSApp;
 
-public class Professor {
-
+public class Professor extends User{
+	Course course;
 }
