@@ -1,1 +1,3 @@
 /build/
+/.classpath
+/src/main/java/com/digit/javaTraining/CRSApp/DatabaseConnection.java
