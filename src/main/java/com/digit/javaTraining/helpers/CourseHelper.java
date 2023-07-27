@@ -18,7 +18,7 @@ public class CourseHelper {
 		System.out.println("Enter the Name of the course: ");
 		String name = sc.nextLine();
 		
-		System.out.println("Enter the Duration of the course: ");
+		System.out.println("Enter the Duration of the course:  ");
 		String duration = sc.nextLine();
 
 		System.out.println("Enter the Content of the course using comma (,): ");
