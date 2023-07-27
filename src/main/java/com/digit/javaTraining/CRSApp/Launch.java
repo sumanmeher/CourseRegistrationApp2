@@ -9,10 +9,7 @@ import com.digit.javaTraining.helpers.StudentHelper;
 public class Launch {
 	public static void main(String[] args) {
 		DatabaseConnection db = new DatabaseConnection();
-//		StudentHelper.asignCourse("rohit", "1243");
-		StudentHelper.allStudentInCourse("1243");
 
-		System.exit(0);
 		
 		System.out.println("Welcome to Digital Courses!");
 		System.out.println();
