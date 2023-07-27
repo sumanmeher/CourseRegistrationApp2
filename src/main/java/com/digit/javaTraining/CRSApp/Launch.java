@@ -10,7 +10,7 @@ public class Launch {
 		
 		
 		DatabaseConnection db = new DatabaseConnection();
-		System.out.println("Welcome to Digital Courses!");
+		System.out.println("Welcome to Digital Courses! ");
 		System.out.println();
 
 		Admin ad = new Admin();

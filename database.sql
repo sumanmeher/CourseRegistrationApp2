@@ -27,8 +27,7 @@ CREATE TABLE Course (
 
 /*  create Student table*/
 CREATE TABLE Student (
-	S_Id VARCHAR(10) PRIMARY KEY, 
-	S_Username VARCHAR(50), 
+	S_Username VARCHAR(50) PRIMARY KEY, 
 	S_Name VARCHAR(50), 
 	S_Password INT, 
 	S_Age VARCHAR(50),
