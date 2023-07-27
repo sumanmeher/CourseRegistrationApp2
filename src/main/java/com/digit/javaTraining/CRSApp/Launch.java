@@ -5,15 +5,14 @@ import java.util.Scanner;
 import com.digit.javaTraining.helpers.ProfessorHelper;
 import com.digit.javaTraining.helpers.StudentHelper;
 
-//import com.digit.javaTraining.helpers.ProfessorHelper;
-
 public class Launch {
 	public static void main(String[] args) {
 		DatabaseConnection db = new DatabaseConnection();
-		ProfessorHelper.showAllProfessor();
+//		StudentHelper.asignCourse("rohit", "1243");
+//		StudentHelper.allStudentInCourse("1243");
 
-		System.exit(0);
-		
+//		System.exit(0);
+
 		System.out.println("Welcome to Digital Courses!");
 		System.out.println();
 
@@ -42,9 +41,9 @@ public class Launch {
 
 		} else if (userInput == 2) {
 			ProfessorHelper.login();
-			
+
 		} else if (userInput == 3) {
-			StudentHelper.
+			StudentHelper.login();
 		} else if (userInput == 4) {
 			System.out.println("Exiting the Application");
 			System.out.println("Thanks for visiting us..");
@@ -60,20 +59,18 @@ public class Launch {
 		boolean isAuth = ad.checkUsernamePassword();
 		if (isAuth) {
 			System.out.println("Authenticated...");
+			Admin.adminMenu(ad);
 		} else {
 			System.out.println("Authentication Failed!");
 			System.out.println();
 			System.out.println("Do you want to try again? Yes/No");
 			String tryAgain = sc.next();
-			if (tryAgain.equalsIgnoreCase("Yes") ) {
+			if (tryAgain.equalsIgnoreCase("Yes")) {
 				adminAuth(ad);
 			} else {
 				mainMenu(ad);
 			}
 		}
 	}
-	
-	
-	
-	
+
 }

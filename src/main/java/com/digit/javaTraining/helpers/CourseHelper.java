@@ -14,7 +14,7 @@ public class CourseHelper {
 	static Connection con = DatabaseConnection.con;
 	static PreparedStatement pstmt;
 
-	void addCourse() {
+	public static void addCourse() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("-----------------------------");
 		System.out.println("           COURSES           ");
@@ -56,6 +56,18 @@ public class CourseHelper {
 		System.out.println("Course Content: " +description);
 
 		System.out.println();
+		
+		System.out.println("Do you want to Create more Courses(Yes/No):");
+		String userInput = sc.next();
+		if (userInput.equalsIgnoreCase("yes")) {
+			addCourse();
+		} else if (userInput.equalsIgnoreCase("no")) {
+			return;
+		} else {
+			System.out.println("invalid Input");
+		}
+		
+		
 
 	}
 	static public void showAllCourses() {
@@ -72,6 +84,7 @@ public class CourseHelper {
 			e.printStackTrace();
 		}
 	}
+	
 	static void displaySpecificCourseById(String id) {
 		String sql = "select c_name, price , duration, description from professor where p_username = ?";
 		PreparedStatement pstmt;
