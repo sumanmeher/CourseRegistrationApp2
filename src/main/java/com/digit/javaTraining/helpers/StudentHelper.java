@@ -36,7 +36,7 @@ public class StudentHelper {
 			int x = pstmt.executeUpdate();
 			System.out.println("inserted");
 		} catch (Exception e) {
-			e.printStackTrace();
+			e.printStackTrace(); 
 		}
 		
 		System.out.println("Select a course to Read");
