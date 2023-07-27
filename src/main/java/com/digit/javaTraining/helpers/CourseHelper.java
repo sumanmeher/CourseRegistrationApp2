@@ -34,7 +34,7 @@ public class CourseHelper {
 		System.out.println("Enter the Price of the course: ");
 		int price = sc.nextInt();
 
-		String sql = "insert into course values(?,?,?,?,?)";
+		String sql = "insert into course (c_id, c_name, price, duration, description) values(?,?,?,?,?)";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);

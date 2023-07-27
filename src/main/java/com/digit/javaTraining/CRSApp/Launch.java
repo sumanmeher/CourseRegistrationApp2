@@ -9,6 +9,8 @@ public class Launch {
 	public static void main(String[] args) {
 		
 		
+//		System.exit(0);
+		
 		DatabaseConnection db = new DatabaseConnection();
 		System.out.println("Welcome to Digital Courses! ");
 		System.out.println();
