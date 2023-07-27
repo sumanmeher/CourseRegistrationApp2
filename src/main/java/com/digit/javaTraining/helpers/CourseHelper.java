@@ -19,6 +19,7 @@ public class CourseHelper {
 		System.out.println("-----------------------------");
 		System.out.println("           COURSES           ");
 		System.out.println("-----------------------------");
+		System.out.println("\n---Add Course---");
 		System.out.println("Enter ID of the course: ");
 		String id = sc.nextLine();
 

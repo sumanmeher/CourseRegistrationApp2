@@ -14,6 +14,9 @@ public class StudentHelper {
 
 	public static void addStudent() {
 		Scanner sc = new Scanner(System.in);
+		System.out.println("-----------------------------");
+		System.out.println("           STUDENT           ");
+		System.out.println("-----------------------------");
 		System.out.println("\n---Add Student---");
 		System.out.println("Enter the name of the Student");
 		String name = sc.next();

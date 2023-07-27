@@ -18,6 +18,7 @@ public class ProfessorHelper {
 		System.out.println("-----------------------------");
 		System.out.println("          PROFESSOR          ");
 		System.out.println("-----------------------------");
+		System.out.println("\n---Add Professor---");
 		System.out.println("Enter the name of the Professor");
 		String name = sc.next();
 		System.out.println("Enter the username:");
@@ -38,6 +39,15 @@ public class ProfessorHelper {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		 System.out.println("Do you want to Add more Professors(Yes/No):");
+			String userInp = sc.next();
+			if (userInp.equalsIgnoreCase("yes")) {
+				addProfessor();
+			} else if (userInp.equalsIgnoreCase("no")) {
+				return;
+			} else {
+				System.out.println("invalid Input");
+			}
 	}
 	
 	static public boolean login() {
