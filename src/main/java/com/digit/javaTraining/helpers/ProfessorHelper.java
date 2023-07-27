@@ -15,7 +15,9 @@ public class ProfessorHelper {
 	
 	public static void addProfessor() {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("\n---Add Professor---");
+		System.out.println("-----------------------------");
+		System.out.println("          PROFESSOR          ");
+		System.out.println("-----------------------------");
 		System.out.println("Enter the name of the Professor");
 		String name = sc.next();
 		System.out.println("Enter the username:");
