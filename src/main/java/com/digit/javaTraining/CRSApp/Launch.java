@@ -3,6 +3,7 @@ package com.digit.javaTraining.CRSApp;
 import java.util.Scanner;
 
 import com.digit.javaTraining.helpers.ProfessorHelper;
+import com.digit.javaTraining.helpers.StudentHelper;
 
 //import com.digit.javaTraining.helpers.ProfessorHelper;
 
@@ -40,9 +41,10 @@ public class Launch {
 			adminAuth(ad);
 
 		} else if (userInput == 2) {
-
+			ProfessorHelper.login();
+			
 		} else if (userInput == 3) {
-
+			StudentHelper.
 		} else if (userInput == 4) {
 			System.out.println("Exiting the Application");
 			System.out.println("Thanks for visiting us..");
