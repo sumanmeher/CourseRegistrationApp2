@@ -1,18 +1,11 @@
 package com.digit.javaTraining.CRSApp;
 
 public class User {
-	String id;
 	String username;
 	String password;
 	String name;
 	int age;
 	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
 	public String getUsername() {
 		return username;
 	}

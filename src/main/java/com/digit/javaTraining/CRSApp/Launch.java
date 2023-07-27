@@ -2,8 +2,17 @@ package com.digit.javaTraining.CRSApp;
 
 import java.util.Scanner;
 
+import com.digit.javaTraining.helpers.ProfessorHelper;
+
+//import com.digit.javaTraining.helpers.ProfessorHelper;
+
 public class Launch {
 	public static void main(String[] args) {
+		DatabaseConnection db = new DatabaseConnection();
+		ProfessorHelper.showAllProfessor();
+
+		System.exit(0);
+		
 		System.out.println("Welcome to Digital Courses!");
 		System.out.println();
 
@@ -58,8 +67,11 @@ public class Launch {
 				adminAuth(ad);
 			} else {
 				mainMenu(ad);
-
 			}
 		}
 	}
+	
+	
+	
+	
 }
