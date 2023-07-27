@@ -35,12 +35,13 @@ public class Admin {
 
 	static void adminMenu(Admin ad) {
 		Scanner sc = new Scanner(System.in);
+		Course c;
 
 		printAdminMenu();
 		System.out.println("Select an option:");
 		int userInput=sc.nextInt();
 		if (userInput == 1) {
-
+			
 		} else if (userInput == 2) {
 
 		} else if (userInput == 3) {
