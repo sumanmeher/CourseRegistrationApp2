@@ -14,7 +14,7 @@ public class CourseHelper {
 	static Connection con = DatabaseConnection.con;
 	static PreparedStatement pstmt;
 
-	void addCourse() {
+	public static void addCourse() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("-----------------------------");
 		System.out.println("           COURSES           ");
@@ -34,7 +34,7 @@ public class CourseHelper {
 		System.out.println("Enter the Price of the course: ");
 		int price = sc.nextInt();
 
-		String sql = "insert into courses values(?,?,?,?,?)";
+		String sql = "insert into course values(?,?,?,?,?)";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -56,6 +56,18 @@ public class CourseHelper {
 		System.out.println("Course Content: " +description);
 
 		System.out.println();
+		
+		System.out.println("Do you want to Create more Courses(Yes/No):");
+		String userInput = sc.next();
+		if (userInput.equalsIgnoreCase("yes")) {
+			addCourse();
+		} else if (userInput.equalsIgnoreCase("no")) {
+			return;
+		} else {
+			System.out.println("invalid Input");
+		}
+		
+		
 
 	}
 	static public void showAllCourses() {

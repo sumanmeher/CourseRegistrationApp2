@@ -2,6 +2,10 @@ package com.digit.javaTraining.CRSApp;
 
 import java.util.Scanner;
 
+import com.digit.javaTraining.helpers.CourseHelper;
+import com.digit.javaTraining.helpers.ProfessorHelper;
+import com.digit.javaTraining.helpers.StudentHelper;
+
 public class Admin {
 	String username;
 	String password;
@@ -39,13 +43,17 @@ public class Admin {
 
 		printAdminMenu();
 		System.out.println("Select an option:");
-		int userInput=sc.nextInt();
+		int userInput = sc.nextInt();
 		if (userInput == 1) {
-			
+			CourseHelper.addCourse();
+			adminMenu(ad);
+
 		} else if (userInput == 2) {
-
+			ProfessorHelper.addProfessor();
+			adminMenu(ad);
 		} else if (userInput == 3) {
-
+			StudentHelper.addStudent();
+			adminMenu(ad);
 		} else if (userInput == 4) {
 			Launch.mainMenu(ad);
 		} else {

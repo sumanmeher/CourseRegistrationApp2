@@ -91,8 +91,6 @@ public class ProfessorHelper {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
 	}
 	
 	
