@@ -72,6 +72,7 @@ public class CourseHelper {
 			e.printStackTrace();
 		}
 	}
+	
 	static void displaySpecificCourseById(String id) {
 		String sql = "select c_name, price , duration, description from professor where p_username = ?";
 		PreparedStatement pstmt;

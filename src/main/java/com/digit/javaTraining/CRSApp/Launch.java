@@ -2,14 +2,15 @@ package com.digit.javaTraining.CRSApp;
 
 import java.util.Scanner;
 
-import com.digit.javaTraining.helpers.ProfessorHelper;
+import com.digit.javaTraining.helpers.StudentHelper;
 
 //import com.digit.javaTraining.helpers.ProfessorHelper;
 
 public class Launch {
 	public static void main(String[] args) {
 		DatabaseConnection db = new DatabaseConnection();
-		ProfessorHelper.showAllProfessor();
+//		StudentHelper.asignCourse("rohit", "1243");
+		StudentHelper.allStudentInCourse("1243");
 
 		System.exit(0);
 		

@@ -5,12 +5,12 @@ USE crs;
 
 /*  create Professor table*/
 CREATE TABLE Professor (
-	P_Id VARCHAR(10) PRIMARY KEY, 
-	P_Username VARCHAR(50), 
+	P_Username VARCHAR(50) PRIMARY KEY, 
 	P_Name VARCHAR(50), 
-	P_Password INT, 
+	P_Password VARCHAR(50), 
 	P_Age INT 
 );
+
 
 /*  create Course table*/ 
 CREATE TABLE Course (
@@ -19,22 +19,17 @@ CREATE TABLE Course (
 	Price INT, 
 	Duration VARCHAR(50), 
 	DESCRIPTION VARCHAR(60), 
-	Professor_id Varchar(10),
-	FOREIGN KEY (Professor_id) REFERENCES Professor(P_Id)
-	
+	Professor_username Varchar(10)
 );
-
 
 
 /*  create Student table*/
 CREATE TABLE Student (
-	S_Id VARCHAR(10) PRIMARY KEY, 
-	S_Username VARCHAR(50), 
-	S_Name VARCHAR(50), 
-	S_Password INT, 
-	S_Age INT,
-	Course_id Varchar(10),
-	FOREIGN KEY (Course_id) REFERENCES Course(C_Id)
+	S_Username VARCHAR(50) PRIMARY KEY, 
+	S_Name VARCHAR(50) NOT NULL, 
+	S_Password VARCHAR(50) NOT NULL, 
+	S_Age VARCHAR(50),
+	Course_id Varchar(10)
 );
 
 /*  create Relation table for students regestring to a course*/
