@@ -72,7 +72,7 @@ public class CourseHelper {
 	}
 	static public void showAllCourses() {
 		System.out.println("---List of Courses--");
-		String sql = "select c_id, c_name, price, duration, description from professor";
+		String sql = "select C_id, C_name, Price, Duration, Description from professor";
 		try {
 			Statement stmt = con.createStatement();
 			ResultSet result = stmt.executeQuery(sql);
@@ -86,17 +86,17 @@ public class CourseHelper {
 	}
 	
 	static void displaySpecificCourseById(String id) {
-		String sql = "select c_name, price , duration, description from professor where p_username = ?";
+		String sql = "select C_name, Price , Duration, Description from professor where p_username = ?";
 		PreparedStatement pstmt;
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			ResultSet result = pstmt.executeQuery();
 			result.next();
-			System.out.println("Course Name: "+result.getString("c_name"));
-			System.out.println("Price: "+result.getInt("price"));
-			System.out.println("Duration: "+result.getString("duration"));
-			System.out.println("Course Content: "+result.getString("description"));
+			System.out.println("Course Name: "+result.getString("C_name"));
+			System.out.println("Price: "+result.getInt("Price"));
+			System.out.println("Duration: "+result.getString("Duration"));
+			System.out.println("Course Content: "+result.getString("Description"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
