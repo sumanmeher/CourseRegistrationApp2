@@ -37,7 +37,7 @@ public class Admin {
 		System.out.println("4. Goto Main Menu");
 	}
 
-	static void adminMenu(Admin ad) {
+	static public void adminMenu(Admin ad) {
 		Scanner sc = new Scanner(System.in);
 		Course c;
 

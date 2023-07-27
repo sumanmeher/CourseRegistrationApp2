@@ -5,14 +5,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.digit.javaTraining.CRSApp.Admin;
 import com.digit.javaTraining.CRSApp.DatabaseConnection;
 
 public class StudentHelper {
 	static Connection con = DatabaseConnection.con;
 
 	public static void addStudent() {
+		Admin ad = new Admin();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("\n---Add Student---");
 		System.out.println("Enter the name of the Student");
@@ -35,6 +38,24 @@ public class StudentHelper {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		System.out.println("Select a course to Read");
+		ArrayList<String> arrList = CourseHelper.showAllCourses();
+		if(arrList.size()<=0) {
+			 System.out.println("No course is created yet.");
+			 Admin.adminMenu(ad);
+		 }
+		System.out.println("Select a option:");
+		int inp = sc.nextInt();
+		asignCourse(userName,arrList.get(inp-1));
+		System.out.println("Do you want to add more Students (yes/no)");
+		 String tryAgain = sc.next();
+		 
+			if (tryAgain.equalsIgnoreCase("Yes")) {
+				addStudent();
+			} else {
+				Admin.adminMenu(ad);
+			}
 	}
 	
 	static public boolean login() {

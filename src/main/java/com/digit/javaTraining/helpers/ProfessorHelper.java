@@ -6,14 +6,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.digit.javaTraining.CRSApp.Admin;
 import com.digit.javaTraining.CRSApp.DatabaseConnection;
+import com.digit.javaTraining.CRSApp.Launch;
 
 public class ProfessorHelper {
 	static Connection con = DatabaseConnection.con;
 	
 	public static void addProfessor() {
+		Admin ad = new Admin();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("-----------------------------");
 		System.out.println("          PROFESSOR          ");
@@ -26,7 +30,7 @@ public class ProfessorHelper {
 		String pass = sc.next();
 		System.out.println("Enter the Age:");
 		int age = sc.nextInt();
-		String sql = "insert into professor values(?,?,?,?)";
+		String sql = "insert into professor (p_username, p_name, p_password, p_age) values(?,?,?,?)";
 		 try {
 			PreparedStatement pstmt= con.prepareStatement(sql);
 			pstmt.setString(1,userName);
@@ -38,6 +42,25 @@ public class ProfessorHelper {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		 
+		 System.out.println("Select a course to Teach");
+		 
+		 ArrayList<String> arrList = CourseHelper.showUnassignedCourse();
+		 if(arrList.size()<=0) {
+			 System.out.println("No course is left to assign");
+			 Admin.adminMenu(ad);
+		 }
+		 System.out.println("Select a option:");
+		 int inp = sc.nextInt();
+		 assignProfessor(userName, arrList.get(inp-1));
+		 System.out.println("Do you want to add more Professor (yes/no)");
+		 String tryAgain = sc.next();
+		 
+			if (tryAgain.equalsIgnoreCase("Yes")) {
+				addProfessor();
+			} else {
+				Admin.adminMenu(ad);
+			}
 	}
 	
 	static public boolean login() {
@@ -91,6 +114,31 @@ public class ProfessorHelper {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	static void assignProfessor(String professorId, String courseId) {
+		try {
+			String sql = "update course set professor_username = ? where c_id = ?";
+			PreparedStatement pstmt  = con.prepareStatement(sql);
+			pstmt.setString(1, professorId);
+			pstmt.setString(2, courseId);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			String sql = "update professor set course_id = ? where p_username = ?";
+			PreparedStatement pstmt  = con.prepareStatement(sql);
+			pstmt.setString(1, courseId);
+			pstmt.setString(2, professorId);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	

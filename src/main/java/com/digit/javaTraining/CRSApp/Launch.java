@@ -2,16 +2,16 @@ package com.digit.javaTraining.CRSApp;
 
 import java.util.Scanner;
 
+import com.digit.javaTraining.helpers.CourseHelper;
 import com.digit.javaTraining.helpers.ProfessorHelper;
 import com.digit.javaTraining.helpers.StudentHelper;
 
 public class Launch {
 	public static void main(String[] args) {
-		
-		
+		DatabaseConnection db = new DatabaseConnection();
+//		CourseHelper.showUnassignedCourse();
 //		System.exit(0);
 		
-		DatabaseConnection db = new DatabaseConnection();
 		System.out.println("Welcome to Digital Courses! ");
 		System.out.println();
 
@@ -30,7 +30,7 @@ public class Launch {
 
 	}
 
-	static void mainMenu(Admin ad) {
+	static public void mainMenu(Admin ad) {
 		Scanner sc = new Scanner(System.in);
 		printMainMenu();
 		System.out.println("Select an option: ");

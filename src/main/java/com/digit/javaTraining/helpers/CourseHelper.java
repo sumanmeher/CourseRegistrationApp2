@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.digit.javaTraining.CRSApp.DatabaseConnection;
@@ -70,19 +71,23 @@ public class CourseHelper {
 		
 
 	}
-	static public void showAllCourses() {
+	static public ArrayList<String> showAllCourses() {
+		ArrayList<String> arrList = new ArrayList<String>();
 		System.out.println("---List of Courses--");
-		String sql = "select C_id, C_name, Price, Duration, Description from professor";
+		String sql = "select C_id, C_name, Price, Duration, Description from course";
 		try {
 			Statement stmt = con.createStatement();
 			ResultSet result = stmt.executeQuery(sql);
 			int count=1;
 			while(result.next()) {
-				System.out.println(result.getString("c_id"));
+				String courseId = result.getString("c_id");
+				System.out.println(count++ +") "+courseId);
+				arrList.add(courseId);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return arrList;
 	}
 	
 	static void displaySpecificCourseById(String id) {
@@ -100,6 +105,26 @@ public class CourseHelper {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	static public ArrayList showUnassignedCourse() {
+		System.out.println("---Unassigned Courses--");
+		String sql = "select C_id, C_name from course where professor_username is null";
+		ArrayList<String> arrList = new ArrayList<String>();
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet result = stmt.executeQuery(sql);
+			
+			int count=1;
+			while(result.next()) {
+				String  courseId = result.getString("c_id");
+				System.out.println(count++ +") "+courseId);
+				arrList.add(courseId);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return arrList;
 	}
 
 }
