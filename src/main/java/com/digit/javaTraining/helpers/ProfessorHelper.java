@@ -111,11 +111,26 @@ public class ProfessorHelper {
 				int count =1;
 				while(studentList.next()) {
 					System.out.println(count++ +") "+studentList.getString("s_username"));
+					stuIdList.add(studentList.getString("s_username"));
 				}
 				
 				System.out.println("--select a student to mark--");
+				int studentNo = sc.nextInt();
+				String studentId = stuIdList.get(studentNo-1);
+				System.out.println("Give marks to "+studentId);
+				int marks = sc.nextInt();
 				
-				
+				try {
+					String sql3 = "update student set s_marks = ? where s_username = ?";
+					PreparedStatement pstmt3  = con.prepareStatement(sql3);
+					pstmt3.setInt(1, marks);
+					pstmt3.setString(2, studentId);
+					pstmt3.executeUpdate();
+					System.out.println("Marks Updated");
+					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 				
 				
 			} catch (SQLException e) {
