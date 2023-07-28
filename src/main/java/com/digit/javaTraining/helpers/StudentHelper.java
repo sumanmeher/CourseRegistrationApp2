@@ -143,7 +143,21 @@ public class StudentHelper {
 		System.out.println("3. Goto Main Menu");
 		System.out.println("4. Exit");
 	}
-//	hjjj
+	
+	static public void showAllStudent() {
+		System.out.println("---List of Students--");
+		String sql = "select s_username, s_name, s_age from student";
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet result = stmt.executeQuery(sql);
+			int count = 1;
+			while (result.next()) {
+				System.out.println(count++ + ") " + result.getString("s_name"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	static void getUserInput(Admin ad, String studentId) {
 		try {

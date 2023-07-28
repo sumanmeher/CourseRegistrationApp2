@@ -41,7 +41,10 @@ public class Admin {
 		System.out.println("1. Add Course");
 		System.out.println("2. Add Professor");
 		System.out.println("3. Add Student");
-		System.out.println("4. Goto Main Menu");
+		System.out.println("4. Show all Courses");
+		System.out.println("5. Show all Students");
+		System.out.println("6. Show all Professors");
+		System.out.println("7. Goto Main Menu");
 	}
 
 	static public void adminMenu(Admin ad) {
@@ -51,20 +54,36 @@ public class Admin {
 		printAdminMenu();
 		System.out.println("Select an option:");
 		int userInput = sc.nextInt();
-		if (userInput == 1) {
+
+		switch(userInput) {
+		case 1:
 			CourseHelper.addCourse();
 			adminMenu(ad);
-
-		} else if (userInput == 2) {
+			break;
+		case 2:
 			ProfessorHelper.addProfessor();
 			adminMenu(ad);
-		} else if (userInput == 3) {
+			break;
+		case 3:
 			StudentHelper.addStudent();
 			adminMenu(ad);
-		} else if (userInput == 4) {
-			Launch.mainMenu(ad);
-		} else {
-			return;
+			break;
+		case 4:
+			ProfessorHelper.showAllProfessor();
+			adminMenu(ad);
+			break;
+		case 5:
+			StudentHelper.showAllStudent();
+			adminMenu(ad);
+			break;
+		case 6:
+			ProfessorHelper.showAllProfessor();
+			adminMenu(ad);
+			break;
+		default:
+			System.out.println("\033[1m\033[31mInvalid Input!\033[0m\033[0m");
+			System.out.println("Please try again...");
+			adminMenu(ad);
 		}
 	}
 
