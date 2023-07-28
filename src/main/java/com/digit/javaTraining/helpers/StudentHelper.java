@@ -137,7 +137,9 @@ public class StudentHelper {
 	}
 
 	static void printStudentSection() {
-		System.out.println("----Student section---- ");
+		System.out.println("-----------------------------");
+		System.out.println("         STUDENT MENU        ");
+		System.out.println("-----------------------------");
 		System.out.println("1. Check score");
 		System.out.println("2. Get Report");
 		System.out.println("3. Goto Main Menu");
@@ -192,7 +194,7 @@ public class StudentHelper {
 			System.out.println("\033[32m\033[1mAuthenticated...\033[0m\033[0m");
 			getUserInput(ad, stud.getUsername());
 		} else {
-			System.out.println("Authentication Failed!");
+			System.out.println("\033[1m\033[31mInvalid Input!\033[0m\033[0m");
 			System.out.println();
 			System.out.println("Do you want to try again? Yes/No");
 			String tryAgain = sc.next();

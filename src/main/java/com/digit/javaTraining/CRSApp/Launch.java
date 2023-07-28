@@ -21,11 +21,9 @@ public class Launch {
 
 	static void printMainMenu() {
 		System.out.println();
-		System.out.println("*****************************");
-		System.out.println("-----------------------------");
-		System.out.println("          MAIN MENU          ");
-		System.out.println("-----------------------------");
-		System.out.println("*****************************");
+		System.out.println("=============================");
+		System.out.println("        * MAIN MENU *        ");
+		System.out.println("=============================");
 		System.out.println("1. Admin Login");
 		System.out.println("2. Professor Login");
 		System.out.println("3. Student Login");
@@ -64,10 +62,10 @@ public class Launch {
 		Scanner sc = new Scanner(System.in);
 		boolean isAuth = ad.checkUsernamePassword();
 		if (isAuth) {
-			System.out.println("Admin Successfully Authenticated...");
+			System.out.println("\033[32m\033[1mAuthenticated...\033[0m\033[0m");
 			Admin.adminMenu(ad);
 		} else {
-			System.out.println("Authentication Failed!");
+			System.out.println("\033[1m\033[31mAuthentication Failed!\033[0m\033[0m");
 			System.out.println();
 			System.out.println("Do you want to try again? Yes/No");
 			String tryAgain = sc.next();

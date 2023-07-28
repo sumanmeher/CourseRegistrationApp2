@@ -79,7 +79,7 @@ public class ProfessorHelper {
 
 	static public Professor login() {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("\n---Professor Login---");
+		System.out.println("\n---PROFESSOR LOGIN---");
 		System.out.println("Enter Your Username");
 		String username = sc.next();
 		System.out.println("Enter Your Password");
@@ -109,14 +109,18 @@ public class ProfessorHelper {
 		Admin ad = new Admin();
 		Professor pr = login();
 		if (pr != null) {
-			System.out.println("---Login Successfull---\n");
+			System.out.println("\033[32m\033[1mAuthenticated...\033[0m\033[0m");
 			try {
 				String sql = "select * from course where c_id = ?";
 				PreparedStatement pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, pr.getCourse_id());
 				ResultSet course = pstmt.executeQuery();
 				course.next();
-				System.out.println("You have Teached " + course.getString("c_name") + "\n");
+				System.out.println("You are teaching " + course.getString("c_name") + "\n");
+				
+				System.out.println("-----------------------------");
+				System.out.println("        PROFESSOR MENU       ");
+				System.out.println("-----------------------------");
 
 				String sql2 = "select * from student where course_id = ?";
 				PreparedStatement pstmt2 = con.prepareStatement(sql2);
