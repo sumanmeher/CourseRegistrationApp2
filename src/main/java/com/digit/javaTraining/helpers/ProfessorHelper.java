@@ -155,8 +155,7 @@ public class ProfessorHelper {
 	static void addMarks(ArrayList<String> stuIdList) {
 		Scanner sc = new Scanner(System.in);
 		Admin ad = new Admin();
-<<<<<<< HEAD
-=======
+
 		System.out.println("Select a student to give marks:");
 		int count = 1;
 		while (count <= stuIdList.size()) {
@@ -165,8 +164,7 @@ public class ProfessorHelper {
 		}
 
 		System.out.println(count+") Go to Main Menu");
->>>>>>> branch 'main' of https://github.com/sumanmeher/Project-3_CourseRegistrationApp2.git
-		
+
 		if(stuIdList.size()<=0) {
 			System.out.println("\033[1m\033[31mNo student found\033[0m\033[0m");
 			System.out.println("Login with another user? Yes/No");
