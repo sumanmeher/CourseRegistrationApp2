@@ -12,6 +12,7 @@ import java.util.Scanner;
 import com.digit.javaTraining.CRSApp.Admin;
 import com.digit.javaTraining.CRSApp.DatabaseConnection;
 import com.digit.javaTraining.CRSApp.Launch;
+import com.digit.javaTraining.CRSApp.Professor;
 
 public class ProfessorHelper {
 	static Connection con = DatabaseConnection.con;
@@ -65,7 +66,7 @@ public class ProfessorHelper {
 			}
 	}
 	
-	static public boolean login() {
+	static public Professor login() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("\n---Professor Login---");
 		System.out.println("Enter Your Username");
@@ -73,19 +74,68 @@ public class ProfessorHelper {
 		System.out.println("Enter Your Password");
 		String pass = sc.next();	
 		try {
-			String sql = "select p_password from professor where p_username = ?";
+			String sql = "select * from professor where p_username = ?";
 			PreparedStatement pstmt  = con.prepareStatement(sql);
 			pstmt.setString(1, username);
 			ResultSet result = pstmt.executeQuery();
 			result.next();
 			if(pass.equals(result.getString("p_password"))) {
-				return true;
-			}return false;
+				Professor pf = new Professor(result.getString("p_name"),result.getString("p_username"),result.getString("p_password"),result.getInt("p_age"),result.getString("course_id"));
+				return pf;
+			}return null;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return false;
+		return null;
 	}
+	
+	public static void mainLogin() {
+		Scanner sc = new Scanner(System.in);
+		Admin ad = new Admin();
+		Professor pr = login();
+		if(pr!=null) {
+			System.out.println("---Professor Logged in---");
+			try {
+				String sql = "select * from course where c_id = ?";
+				PreparedStatement pstmt  = con.prepareStatement(sql);
+				pstmt.setString(1, pr.getCourse_id());
+				ResultSet course = pstmt.executeQuery();
+				course.next();
+				System.out.println("You have Teached "+course.getString("c_name")+"\n");
+				
+				String sql2 = "select * from student where course_id = ?";
+				PreparedStatement pstmt2  = con.prepareStatement(sql2);
+				pstmt2.setString(1, course.getString("c_id"));
+				ResultSet studentList = pstmt2.executeQuery();
+				ArrayList<String> stuIdList = new ArrayList();
+				int count =1;
+				while(studentList.next()) {
+					System.out.println(count++ +") "+studentList.getString("s_username"));
+				}
+				
+				System.out.println("--select a student to mark--");
+				
+				
+				
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}else {
+			System.out.println("Authentication Failed!");
+			System.out.println();
+			System.out.println("Do you want to try again? Yes/No");
+			String tryAgain = sc.next();
+			if (tryAgain.equalsIgnoreCase("Yes")) {
+				mainLogin();
+			} else {
+				Launch.mainMenu(ad);
+			}
+		}
+		
+	}
+	
+	
 	
 	static public void showAllProfessor() {
 		System.out.println("---List of Professors--");
