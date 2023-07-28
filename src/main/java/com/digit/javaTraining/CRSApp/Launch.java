@@ -9,7 +9,7 @@ public class Launch {
 	public static void main(String[] args) throws Exception {
 		DatabaseConnection db = new DatabaseConnection();
 //		CourseHelper.showUnassignedCourse();
-//		ProfessorHelper.mainLogin();
+//		ProfessorHelper.mainLogin()df;
 //		System.exit(0);
 
 		System.out.println("Welcome to Digital Courses! ");
