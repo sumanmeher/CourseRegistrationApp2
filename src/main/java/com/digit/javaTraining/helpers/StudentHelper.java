@@ -251,7 +251,7 @@ public class StudentHelper {
 			System.out.print("*");
 			sdescription = String.format("containing %s", courseDetail.getString("Description"));
 
-			System.out.println("******************************************************");
+			System.out.println("****************************************************");
 			System.out.println("*                                                    *");
 			System.out.println("*         Certificate of Course Completion           *");
 			System.out.println("*                                                    *");
