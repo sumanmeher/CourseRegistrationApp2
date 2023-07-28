@@ -19,7 +19,7 @@ public class CourseHelper {
 		Scanner sc = new Scanner(System.in);
 		System.out.println();
 		System.out.println("*****************************");
-		System.out.println("           COURSES            ");
+		System.out.println("           COURSES           ");
 		System.out.println("*****************************");
 		System.out.println("\n---Add Course---");
 		System.out.println("Enter ID of the course: ");
@@ -53,7 +53,7 @@ public class CourseHelper {
 		}
 		
 		System.out.println();
-		System.out.println("Course Detail:");
+		System.out.println("Course Details:");
 		System.out.println("--------------");
 		System.out.println("Id:             " + id);
 		System.out.println("Name:           " + name);
