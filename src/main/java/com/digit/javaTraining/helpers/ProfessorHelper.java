@@ -216,7 +216,7 @@ public class ProfessorHelper {
 			ResultSet result = stmt.executeQuery(sql);
 			int count = 1;
 			while (result.next()) {
-				System.out.println(count++ + ") " + result.getString("p_username"));
+				System.out.println(count++ + ") " + result.getString("p_name"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
