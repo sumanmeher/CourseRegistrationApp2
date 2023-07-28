@@ -132,8 +132,13 @@ public class ProfessorHelper {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+<<<<<<< HEAD
 		} else {
 			System.out.println("Authentication Failed!");
+=======
+		}else {
+			System.out.println("\033[1m\033[31mAuthentication Failed!...\033[0m\033[0m");
+>>>>>>> branch 'main' of https://github.com/sumanmeher/Project-3_CourseRegistrationApp2.git
 			System.out.println();
 			System.out.println("Do you want to try again? Yes/No");
 			String tryAgain = sc.next();
@@ -155,10 +160,17 @@ public class ProfessorHelper {
 			System.out.println(count + ") " + stuIdList.get(count - 1));
 			count++;
 		}
+<<<<<<< HEAD
 		System.out.println(count + ") Goto Main Menu");
 
 		if (stuIdList.size() <= 0) {
 			System.out.println("No student found");
+=======
+		System.out.println(count+") Goto Main Menu");
+		
+		if(stuIdList.size()<=0) {
+			System.out.println("\033[1m\033[31mNo student found\033[0m\033[0m");
+>>>>>>> branch 'main' of https://github.com/sumanmeher/Project-3_CourseRegistrationApp2.git
 			System.out.println("Login with another user? Yes/No");
 			String tryAgain = sc.next();
 			if (tryAgain.equalsIgnoreCase("Yes")) {

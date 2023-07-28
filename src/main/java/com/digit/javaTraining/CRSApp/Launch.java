@@ -2,12 +2,11 @@ package com.digit.javaTraining.CRSApp;
 
 import java.util.Scanner;
 
-import com.digit.javaTraining.helpers.CourseHelper;
 import com.digit.javaTraining.helpers.ProfessorHelper;
 import com.digit.javaTraining.helpers.StudentHelper;
 
 public class Launch {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		DatabaseConnection db = new DatabaseConnection();
 //		CourseHelper.showUnassignedCourse();
 //		ProfessorHelper.mainLogin();
@@ -22,9 +21,11 @@ public class Launch {
 
 	static void printMainMenu() {
 		System.out.println();
+		System.out.println("*****************************");
 		System.out.println("-----------------------------");
 		System.out.println("          MAIN MENU          ");
 		System.out.println("-----------------------------");
+		System.out.println("*****************************");
 		System.out.println("1. Admin Login");
 		System.out.println("2. Professor Login");
 		System.out.println("3. Student Login");
