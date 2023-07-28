@@ -110,7 +110,7 @@ public class StudentHelper {
 			pstmt.setString(1, course_id);
 			pstmt.setString(2, student_id);
 			pstmt.executeUpdate();
-			System.out.println("Course Assigned Sucessfully..");
+			System.out.println("\033[32m\033[1mCourse Assigned Sucessfully...\033[0m\033[0m");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
