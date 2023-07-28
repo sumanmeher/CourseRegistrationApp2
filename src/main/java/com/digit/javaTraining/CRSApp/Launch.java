@@ -1,5 +1,6 @@
 package com.digit.javaTraining.CRSApp;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.digit.javaTraining.helpers.ProfessorHelper;
@@ -32,27 +33,33 @@ public class Launch {
 	}
 
 	static public void mainMenu(Admin ad) {
-		Scanner sc = new Scanner(System.in);
-		printMainMenu();
-		System.out.println("Select an option: ");
-		int userInput = sc.nextInt();
-		if (userInput == 1) {
-			adminAuth(ad);
+		try {
+			Scanner sc = new Scanner(System.in);
+			printMainMenu();
+			System.out.println("Select an option: ");
+			int userInput = sc.nextInt();
+			if (userInput == 1) {
+				adminAuth(ad);
 
-		} else if (userInput == 2) {
-			ProfessorHelper.mainLogin();
+			} else if (userInput == 2) {
+				ProfessorHelper.mainLogin();
 
-		} else if (userInput == 3) {
-			StudentHelper.mainLogin();
-			// StudentHelper.getUserInput(ad, );
-		} else if (userInput == 4) {
-			System.out.println("Exiting the Application");
-			System.out.println("Thanks for visiting us..");
-			System.exit(0);
-		} else {
-			System.out.println("\033[1m\033[31mInvalid Input!\033[0m\033[0m");
+			} else if (userInput == 3) {
+				StudentHelper.mainLogin();
+				// StudentHelper.getUserInput(ad, );
+			} else if (userInput == 4) {
+				System.out.println("Exiting the Application");
+				System.out.println("Thanks for visiting us..");
+				System.exit(0);
+			} else {
+				System.out.println("\033[1m\033[31mInvalid Input!\033[0m\033[0m");
 
-			System.out.println("\033[0mPlease try again...\033[1m");
+				System.out.println("\033[1mPlease try again...\033[0m");
+				mainMenu(ad);
+			}
+		} catch (InputMismatchException ime) {
+			System.out.println("\033[1m\033[31mInvalid Input!...\033[0m\033[0m");
+			System.out.println("\033[1mPlease try again...\033[0m");
 			mainMenu(ad);
 		}
 

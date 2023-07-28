@@ -1,5 +1,6 @@
 package com.digit.javaTraining.CRSApp;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.digit.javaTraining.helpers.CourseHelper;
@@ -42,10 +43,11 @@ public class Admin {
 		System.out.println("4. Show all Courses");
 		System.out.println("5. Show all Students");
 		System.out.println("6. Show all Professors");
-		System.out.println("7. Goto Main Menu");
+		System.out.println("7. Go to Main Menu");
 	}
 
 	static public void adminMenu(Admin ad) {
+		try {
 		Scanner sc = new Scanner(System.in);
 		Course c;
 
@@ -82,7 +84,12 @@ public class Admin {
 			Launch.mainMenu(ad);
 		default:
 			System.out.println("\033[1m\033[31mInvalid Input!\033[0m\033[0m");
-			System.out.println("\033[0mPlease try again...\033[1m");
+			System.out.println("\033[1mPlease try again...\033[0m");
+			adminMenu(ad);
+		}
+		}catch(InputMismatchException ime) {
+			System.out.println("\033[1m\033[31mInvalid Input!\033[0m\033[0m");
+			System.out.println("\033[1mPlease try again...\033[0m");
 			adminMenu(ad);
 		}
 	}
