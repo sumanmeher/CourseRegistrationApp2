@@ -155,6 +155,17 @@ public class ProfessorHelper {
 	static void addMarks(ArrayList<String> stuIdList) {
 		Scanner sc = new Scanner(System.in);
 		Admin ad = new Admin();
+<<<<<<< HEAD
+=======
+		System.out.println("Select a student to give marks:");
+		int count = 1;
+		while (count <= stuIdList.size()) {
+			System.out.println(count + ") " + stuIdList.get(count - 1));
+			count++;
+		}
+
+		System.out.println(count+") Go to Main Menu");
+>>>>>>> branch 'main' of https://github.com/sumanmeher/Project-3_CourseRegistrationApp2.git
 		
 		if(stuIdList.size()<=0) {
 			System.out.println("\033[1m\033[31mNo student found\033[0m\033[0m");
@@ -197,7 +208,7 @@ public class ProfessorHelper {
 			pstmt3.setInt(1, marks);
 			pstmt3.setString(2, studentId);
 			pstmt3.executeUpdate();
-			System.out.println("Marks Updated");
+			System.out.println("\033[32m\033[1mMarks Updated\033[31m\033[0m");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -213,7 +224,7 @@ public class ProfessorHelper {
 	}
 
 	static public void showAllProfessor() {
-		System.out.println("\033[0m---List of Professors--\033[1m");
+		System.out.println("\033[1m---List of Professors--\033[0m");
 		String sql = "select p_username, p_name, p_age from professor";
 		try {
 			Statement stmt = con.createStatement();

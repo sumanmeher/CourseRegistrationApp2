@@ -65,13 +65,13 @@ public class StudentHelper {
 			}
 
 		} catch (InputMismatchException ime) {
-			System.out.println("\033[1m\033[31mSomething went wrong in Database!...\033[0m\033[0m");
-			System.out.println("\033[0mPlease try again...\033[1m");
+			System.out.println("\033[1m\033[31mInvalid Input!...\033[0m\033[0m");
+			System.out.println("\033[1mPlease try again...\033[0m");
 			addStudent();
 		}catch (SQLException e) {
 			
 			System.out.println("\033[1m\033[31mSomething went wrong in Database!...\033[0m\033[0m");
-			System.out.println("\033[0mPlease try again...\033[1m");
+			System.out.println("\033[1mPlease try again...\033[0m");
 			addStudent();
 		}catch(Exception e) {
 			Admin ad = new Admin();
