@@ -43,6 +43,7 @@ public class Launch {
 
 		} else if (userInput == 3) {
 			StudentHelper.login();
+			StudentHelper.getUserInput(ad, );
 		} else if (userInput == 4) {
 			System.out.println("Exiting the Application");
 			System.out.println("Thanks for visiting us..");
