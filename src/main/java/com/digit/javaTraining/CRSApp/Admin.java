@@ -17,6 +17,12 @@ public class Admin {
 
 	public boolean checkUsernamePassword() {
 		Scanner sc = new Scanner(System.in);
+		
+		System.out.println();
+		System.out.println("-----------------------------");
+		System.out.println("         ADMIN LOGIN         ");
+		System.out.println("-----------------------------");
+		
 		System.out.println("Enter Admin Username:");
 		String name = sc.next();
 		System.out.println("Enter Admin Password");
@@ -28,6 +34,7 @@ public class Admin {
 	}
 
 	static void printAdminMenu() {
+		System.out.println();
 		System.out.println("-----------------------------");
 		System.out.println("          ADMIN MENU          ");
 		System.out.println("-----------------------------");

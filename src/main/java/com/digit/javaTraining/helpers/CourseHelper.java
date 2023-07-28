@@ -17,6 +17,7 @@ public class CourseHelper {
 
 	public static void addCourse() {
 		Scanner sc = new Scanner(System.in);
+		System.out.println();
 		System.out.println("-----------------------------");
 		System.out.println("           COURSES           ");
 		System.out.println("-----------------------------");
@@ -46,11 +47,14 @@ public class CourseHelper {
 			pstmt.setString(5, description);
 
 			int x = pstmt.executeUpdate();
-			System.out.println("inserted");
+			System.out.println("Course Added Successfully...");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		
+		System.out.println();
+		System.out.println("Course Detail:");
+		System.out.println("--------------");
 		System.out.println("Id:             " + id);
 		System.out.println("Name:           " + name);
 		System.out.println("Price:          Rs." + price);
@@ -109,7 +113,6 @@ public class CourseHelper {
 	}
 	
 	static public ArrayList showUnassignedCourse() {
-		System.out.println("---Unassigned Courses--");
 		String sql = "select C_id, C_name from course where professor_username is null";
 		ArrayList<String> arrList = new ArrayList<String>();
 		try {

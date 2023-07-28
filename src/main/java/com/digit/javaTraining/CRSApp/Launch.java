@@ -14,7 +14,6 @@ public class Launch {
 //		System.exit(0);
 
 		System.out.println("Welcome to Digital Courses! ");
-		System.out.println();
 
 		Admin ad = new Admin();
 		mainMenu(ad);
@@ -22,12 +21,14 @@ public class Launch {
 	}
 
 	static void printMainMenu() {
+		System.out.println();
 		System.out.println("-----------------------------");
 		System.out.println("          MAIN MENU          ");
 		System.out.println("-----------------------------");
 		System.out.println("1. Admin Login");
 		System.out.println("2. Professor Login");
 		System.out.println("3. Student Login");
+		System.out.println("4. Exit the Application");
 
 	}
 
@@ -50,7 +51,10 @@ public class Launch {
 			System.out.println("Thanks for visiting us..");
 			System.exit(0);
 		} else {
+			System.out.println("\033[1m\033[31mInvalid Input!\033[0m\033[0m");
 
+			System.out.println("Please try again...");
+			mainMenu(ad);
 		}
 
 	}
@@ -59,7 +63,7 @@ public class Launch {
 		Scanner sc = new Scanner(System.in);
 		boolean isAuth = ad.checkUsernamePassword();
 		if (isAuth) {
-			System.out.println("Authenticated...");
+			System.out.println("Admin Successfully Authenticated...");
 			Admin.adminMenu(ad);
 		} else {
 			System.out.println("Authentication Failed!");
