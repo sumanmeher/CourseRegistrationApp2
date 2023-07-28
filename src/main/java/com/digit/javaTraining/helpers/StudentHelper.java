@@ -12,7 +12,6 @@ import java.util.Scanner;
 import com.digit.javaTraining.CRSApp.Admin;
 import com.digit.javaTraining.CRSApp.DatabaseConnection;
 import com.digit.javaTraining.CRSApp.Launch;
-import com.digit.javaTraining.CRSApp.Professor;
 import com.digit.javaTraining.CRSApp.Student;
 
 public class StudentHelper {
@@ -27,14 +26,14 @@ public class StudentHelper {
 			System.out.println("-----------------------------");
 			System.out.println("\n---Add Student---");
 			System.out.println("Enter the name of the Student");
-			String name = sc.next();
+			String name = sc.nextLine();
 			System.out.println("Enter the username:");
 			String userName = sc.next();
 			System.out.println("Enter the Password");
 			String pass = sc.next();
 			System.out.println("Enter the Age:");
 			int age = sc.nextInt();
-			String sql = "insert into students (s_username, s_name, s_password, s_age) values(?,?,?,?)";
+			String sql = "insert into student (s_username, s_name, s_password, s_age) values(?,?,?,?)";
 			
 				PreparedStatement pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, userName);
@@ -42,7 +41,7 @@ public class StudentHelper {
 				pstmt.setString(3, pass);
 				pstmt.setInt(4, age);
 				int x = pstmt.executeUpdate();
-				System.out.println("inserted");
+				System.out.println("Student Added Successfully..");
 			
 
 			System.out.println("Select a course to Read");
@@ -54,6 +53,7 @@ public class StudentHelper {
 			System.out.println("Select a option:");
 			int inp = sc.nextInt();
 			asignCourse(userName, arrList.get(inp - 1));
+			
 			System.out.println("Do you want to add more Students (yes/no)");
 			String tryAgain = sc.next();
 
@@ -113,6 +113,7 @@ public class StudentHelper {
 			pstmt.setString(1, course_id);
 			pstmt.setString(2, student_id);
 			pstmt.executeUpdate();
+			System.out.println("Course Assigned Sucessfully..");
 
 		} catch (SQLException e) {
 			e.printStackTrace();

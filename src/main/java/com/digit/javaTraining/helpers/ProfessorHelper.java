@@ -43,17 +43,8 @@ public class ProfessorHelper {
 			pstmt.setInt(4, age);
 			int x = pstmt.executeUpdate();
 			System.out.println("Professor Added Successfully.");
+			assignProfessorMain(userName);
 
-			System.out.println("\nSelect a course to Teach");
-
-			ArrayList<String> arrList = CourseHelper.showUnassignedCourse();
-			if (arrList.size() <= 0) {
-				System.out.println("No course is left to assign");
-				Admin.adminMenu(ad);
-			}
-			System.out.println("Select a option:");
-			int inp = sc.nextInt();
-			assignProfessor(userName, arrList.get(inp - 1));
 			System.out.println("Do you want to add more Professor (yes/no)");
 			String tryAgain = sc.next();
 
@@ -78,6 +69,7 @@ public class ProfessorHelper {
 	}
 
 	static public Professor login() {
+		Admin ad = new Admin();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("\n---PROFESSOR LOGIN---");
 		System.out.println("Enter Your Username");
@@ -99,7 +91,9 @@ public class ProfessorHelper {
 			}
 			return null;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("\033[1m\033[31mDatabase Error Occured!...\033[0m\033[0m");
+			System.out.println("Redirecting to Main Menu...");
+			Admin.adminMenu(ad);
 		}
 		return null;
 	}
@@ -111,6 +105,16 @@ public class ProfessorHelper {
 		if (pr != null) {
 			System.out.println("\033[32m\033[1mAuthenticated...\033[0m\033[0m");
 			try {
+				if(pr.getCourse_id()==null) {
+					System.out.println("You are not assigned to any Course yet.");
+					assignProfessorMain(pr.getUsername());
+					
+					System.out.println("Successfully Assigned the Course.");
+					System.out.println("First teach the students then Login again to mark them.");
+					Launch.mainMenu(ad);
+					System.exit(0);
+				}
+				
 				String sql = "select * from course where c_id = ?";
 				PreparedStatement pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, pr.getCourse_id());
@@ -154,14 +158,6 @@ public class ProfessorHelper {
 	static void addMarks(ArrayList<String> stuIdList) {
 		Scanner sc = new Scanner(System.in);
 		Admin ad = new Admin();
-		System.out.println("Select a student to give marks:");
-		int count = 1;
-		while (count <= stuIdList.size()) {
-			System.out.println(count + ") " + stuIdList.get(count - 1));
-			count++;
-		}
-
-		System.out.println(count+") Goto Main Menu");
 		
 		if(stuIdList.size()<=0) {
 			System.out.println("\033[1m\033[31mNo student found\033[0m\033[0m");
@@ -172,8 +168,19 @@ public class ProfessorHelper {
 			} else {
 				Launch.mainMenu(ad);
 			}
-
+			return;
 		}
+			
+		System.out.println("Select a student to give marks:");
+		int count = 1;
+		while (count <= stuIdList.size()) {
+			System.out.println(count + ") " + stuIdList.get(count - 1));
+			count++;
+		}
+
+		System.out.println(count+") Goto Main Menu");
+		
+		
 
 		System.out.println("select a student to mark:");
 		int studentNo = sc.nextInt();
@@ -184,7 +191,7 @@ public class ProfessorHelper {
 		}
 
 		String studentId = stuIdList.get(studentNo - 1);
-		System.out.println("Give marks to " + studentId);
+		System.out.println("Give marks to " + studentId+":");
 		int marks = sc.nextInt();
 
 		try {
@@ -262,6 +269,21 @@ public class ProfessorHelper {
 			e.printStackTrace();
 		}
 
+	}
+	
+	static void assignProfessorMain(String professorId) {
+		Scanner sc = new Scanner(System.in);
+		Admin ad = new Admin();
+		System.out.println("\nSelect a course to Teach");
+
+		ArrayList<String> arrList = CourseHelper.showUnassignedCourse();
+		if (arrList.size() <= 0) {
+			System.out.println("No course is left to assign");
+			Admin.adminMenu(ad);
+		}
+		System.out.println("Select a option:");
+		int inp = sc.nextInt();
+		assignProfessor(professorId, arrList.get(inp - 1));
 	}
 
 }

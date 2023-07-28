@@ -78,6 +78,8 @@ public class Admin {
 			ProfessorHelper.showAllProfessor();
 			adminMenu(ad);
 			break;
+		case 7:
+			Launch.mainMenu(ad);
 		default:
 			System.out.println("\033[1m\033[31mInvalid Input!\033[0m\033[0m");
 			System.out.println("Please try again...");
