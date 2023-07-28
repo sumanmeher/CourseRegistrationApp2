@@ -108,30 +108,11 @@ public class ProfessorHelper {
 				pstmt2.setString(1, course.getString("c_id"));
 				ResultSet studentList = pstmt2.executeQuery();
 				ArrayList<String> stuIdList = new ArrayList();
-				int count =1;
 				while(studentList.next()) {
-					System.out.println(count++ +") "+studentList.getString("s_username"));
 					stuIdList.add(studentList.getString("s_username"));
 				}
-				
-				System.out.println("--select a student to mark--");
-				int studentNo = sc.nextInt();
-				String studentId = stuIdList.get(studentNo-1);
-				System.out.println("Give marks to "+studentId);
-				int marks = sc.nextInt();
-				
-				try {
-					String sql3 = "update student set s_marks = ? where s_username = ?";
-					PreparedStatement pstmt3  = con.prepareStatement(sql3);
-					pstmt3.setInt(1, marks);
-					pstmt3.setString(2, studentId);
-					pstmt3.executeUpdate();
-					System.out.println("Marks Updated");
-					
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-				
+
+				addMarks(stuIdList);	
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -148,6 +129,64 @@ public class ProfessorHelper {
 			}
 		}
 		
+	}
+	
+	static void addMarks(ArrayList<String>stuIdList) {
+		Scanner sc = new Scanner(System.in);
+		Admin ad = new Admin();
+		int count =1;
+		while(count<=stuIdList.size()) {
+			System.out.println(count +") "+stuIdList.get(count-1));
+			count++;
+		}
+		System.out.println(count+") Goto Main Menu");
+		
+		if(stuIdList.size()<=0) {
+			System.out.println("No student found");
+			System.out.println("Login with another user? Yes/No");
+			String tryAgain = sc.next();
+			if (tryAgain.equalsIgnoreCase("Yes")) {
+				mainLogin();
+			} else {
+				Launch.mainMenu(ad);
+			}
+			
+		}
+		
+		
+		System.out.println("--select a student to mark--");
+		int studentNo = sc.nextInt();
+		
+		if(studentNo==stuIdList.size()+1) {
+			Launch.mainMenu(ad);
+			System.exit(0);
+		}
+		
+		String studentId = stuIdList.get(studentNo-1);
+		System.out.println("Give marks to "+studentId);
+		int marks = sc.nextInt();
+		
+		
+		
+		try {
+			String sql3 = "update student set s_marks = ? where s_username = ?";
+			PreparedStatement pstmt3  = con.prepareStatement(sql3);
+			pstmt3.setInt(1, marks);
+			pstmt3.setString(2, studentId);
+			pstmt3.executeUpdate();
+			System.out.println("Marks Updated");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("Do you want to give mark to other student? Yes/No");
+		String tryAgain = sc.next();
+		if (tryAgain.equalsIgnoreCase("Yes")) {
+			addMarks(stuIdList);
+		} else {
+			Launch.mainMenu(ad);
+		}
 	}
 	
 	
