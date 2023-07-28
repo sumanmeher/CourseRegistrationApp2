@@ -118,7 +118,7 @@ public class ProfessorHelper {
 				e.printStackTrace();
 			}
 		}else {
-			System.out.println("Authentication Failed!");
+			System.out.println("\033[1m\033[31mAuthentication Failed!...\033[0m\033[0m");
 			System.out.println();
 			System.out.println("Do you want to try again? Yes/No");
 			String tryAgain = sc.next();
@@ -142,7 +142,7 @@ public class ProfessorHelper {
 		System.out.println(count+") Goto Main Menu");
 		
 		if(stuIdList.size()<=0) {
-			System.out.println("No student found");
+			System.out.println("\033[1m\033[31mNo student found\033[0m\033[0m");
 			System.out.println("Login with another user? Yes/No");
 			String tryAgain = sc.next();
 			if (tryAgain.equalsIgnoreCase("Yes")) {

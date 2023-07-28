@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.digit.javaTraining.CRSApp.Admin;
@@ -18,48 +19,62 @@ public class StudentHelper {
 	static Connection con = DatabaseConnection.con;
 
 	public static void addStudent() {
-		Admin ad = new Admin();
-		Scanner sc = new Scanner(System.in);
-		System.out.println("-----------------------------");
-		System.out.println("           STUDENT           ");
-		System.out.println("-----------------------------");
-		System.out.println("\n---Add Student---");
-		System.out.println("Enter the name of the Student");
-		String name = sc.next();
-		System.out.println("Enter the username:");
-		String userName = sc.next();
-		System.out.println("Enter the Password");
-		String pass = sc.next();
-		System.out.println("Enter the Age:");
-		int age = sc.nextInt();
-		String sql = "insert into student (s_username, s_name, s_password, s_age) values(?,?,?,?)";
 		try {
-			PreparedStatement pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, userName);
-			pstmt.setString(2, name);
-			pstmt.setString(3, pass);
-			pstmt.setInt(4, age);
-			int x = pstmt.executeUpdate();
-			System.out.println("inserted");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+			Admin ad = new Admin();
+			Scanner sc = new Scanner(System.in);
+			System.out.println("-----------------------------");
+			System.out.println("           STUDENT           ");
+			System.out.println("-----------------------------");
+			System.out.println("\n---Add Student---");
+			System.out.println("Enter the name of the Student");
+			String name = sc.next();
+			System.out.println("Enter the username:");
+			String userName = sc.next();
+			System.out.println("Enter the Password");
+			String pass = sc.next();
+			System.out.println("Enter the Age:");
+			int age = sc.nextInt();
+			String sql = "insert into students (s_username, s_name, s_password, s_age) values(?,?,?,?)";
+			
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, userName);
+				pstmt.setString(2, name);
+				pstmt.setString(3, pass);
+				pstmt.setInt(4, age);
+				int x = pstmt.executeUpdate();
+				System.out.println("inserted");
+			
 
-		System.out.println("Select a course to Read");
-		ArrayList<String> arrList = CourseHelper.showAllCourses();
-		if (arrList.size() <= 0) {
-			System.out.println("No course is created yet.");
-			Admin.adminMenu(ad);
-		}
-		System.out.println("Select a option:");
-		int inp = sc.nextInt();
-		asignCourse(userName, arrList.get(inp - 1));
-		System.out.println("Do you want to add more Students (yes/no)");
-		String tryAgain = sc.next();
+			System.out.println("Select a course to Read");
+			ArrayList<String> arrList = CourseHelper.showAllCourses();
+			if (arrList.size() <= 0) {
+				System.out.println("No course is created yet.");
+				Admin.adminMenu(ad);
+			}
+			System.out.println("Select a option:");
+			int inp = sc.nextInt();
+			asignCourse(userName, arrList.get(inp - 1));
+			System.out.println("Do you want to add more Students (yes/no)");
+			String tryAgain = sc.next();
 
-		if (tryAgain.equalsIgnoreCase("Yes")) {
+			if (tryAgain.equalsIgnoreCase("Yes")) {
+				addStudent();
+			} else {
+				Admin.adminMenu(ad);
+			}
+
+		} catch (InputMismatchException ime) {
+			System.out.println("\033[1m\033[31mSomething went wrong in Database!...\033[0m\033[0m");
+			System.out.println("Please try again...");
 			addStudent();
-		} else {
+		}catch (SQLException e) {
+			
+			System.out.println("\033[1m\033[31mSomething went wrong in Database!...\033[0m\033[0m");
+			System.out.println("Please try again...");
+			addStudent();
+		}catch(Exception e) {
+			Admin ad = new Admin();
+			System.out.println("\033[1m\033[31mSomething went wrong in Database!...\033[0m\033[0m");
 			Admin.adminMenu(ad);
 		}
 	}
@@ -80,7 +95,9 @@ public class StudentHelper {
 			if (pass.equals(result.getString("s_password"))) {
 				Student stud = new Student(result.getString("s_name"), result.getString("s_username"),
 						result.getString("s_password"), result.getInt("s_age"));
+				
 				return stud;
+				
 			}
 			return null;
 		} catch (SQLException e) {
@@ -145,7 +162,7 @@ public class StudentHelper {
 				getUserInput(ad, studentId);
 			} else if (userInput == 2) {
 				printScoreCard(studentId);
-				getUserInput(ad,studentId);
+				getUserInput(ad, studentId);
 
 				mainLogin();
 			} else if (userInput == 3) {
@@ -156,11 +173,13 @@ public class StudentHelper {
 				System.out.println("Thanks for visiting us.");
 				System.exit(0);
 			} else {
-				System.out.println("wrong input");
+				System.out.println("Wrong Input");
 				System.exit(0);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("\033[1m\033[31mWrong Input!...\033[0m\033[0m");
+			System.out.println("Select correct option");
+			getUserInput(ad, studentId);
 		}
 	}
 
@@ -170,7 +189,7 @@ public class StudentHelper {
 		Student stud = login();
 
 		if (stud != null) {
-			System.out.println("---Student Logged in---");
+			System.out.println("\033[32m\033[1mAuthenticated...\033[0m\033[0m");
 			getUserInput(ad, stud.getUsername());
 		} else {
 			System.out.println("Authentication Failed!");
