@@ -12,7 +12,7 @@ public class Launch {
 //		CourseHelper.showUnassignedCourse();
 //		ProfessorHelper.mainLogin();
 //		System.exit(0);
-		
+
 		System.out.println("Welcome to Digital Courses! ");
 		System.out.println();
 
@@ -43,8 +43,8 @@ public class Launch {
 			ProfessorHelper.mainLogin();
 
 		} else if (userInput == 3) {
-			StudentHelper.login();
-			StudentHelper.getUserInput(ad, );
+			StudentHelper.mainLogin();
+			// StudentHelper.getUserInput(ad, );
 		} else if (userInput == 4) {
 			System.out.println("Exiting the Application");
 			System.out.println("Thanks for visiting us..");

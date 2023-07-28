@@ -11,6 +11,7 @@ import java.util.Scanner;
 import com.digit.javaTraining.CRSApp.Admin;
 import com.digit.javaTraining.CRSApp.DatabaseConnection;
 import com.digit.javaTraining.CRSApp.Launch;
+import com.digit.javaTraining.CRSApp.Professor;
 import com.digit.javaTraining.CRSApp.Student;
 
 public class StudentHelper {
@@ -71,13 +72,14 @@ public class StudentHelper {
 		System.out.println("Enter Your Password");
 		String pass = sc.next();
 		try {
-			String sql = "select s_password from student where s_username = ?";
+			String sql = "select * from student where s_username = ?";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, username);
 			ResultSet result = pstmt.executeQuery();
 			result.next();
 			if (pass.equals(result.getString("s_password"))) {
-				Student stud = new Student(result.getString("s_name"),result.getString("s_username"),result.getString("password"),result.getInt("age"));
+				Student stud = new Student(result.getString("s_name"), result.getString("s_username"),
+						result.getString("s_password"), result.getInt("s_age"));
 				return stud;
 			}
 			return null;
@@ -127,58 +129,82 @@ public class StudentHelper {
 
 	static void getUserInput(Admin ad, String studentId) {
 		try {
-			String sql = "select * from student where course_id = ?";
+			String sql = "select * from student where S_Username = ?";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, studentId);
 			ResultSet studentDetail = pstmt.executeQuery();
 			studentDetail.next();
-		
-		Scanner sc = new Scanner(System.in);
-		printStudentSection();
-		System.out.println("Select an option:");
-		int userInput = sc.nextInt();
-		if (userInput == 1) {
-			System.out.println("Your marks is: " + studentDetail.getString("s_marks"));
+
+			Scanner sc = new Scanner(System.in);
 			printStudentSection();
-		} else if (userInput == 2) {
-			printScoreCard(studentId);
-			printStudentSection();
-		} else if (userInput == 3) {
-			Launch.mainMenu(ad);
-			return;
-		} else if (userInput == 4) {
-			System.out.println("Exiting the Application.");
-			System.out.println("Thanks for visiting us.");
-			System.exit(0);
-		} else {
-			System.out.println("wrong input");
-			System.exit(0);
-		}
-		}catch (Exception e) {
+			System.out.println("Select an option:");
+			int userInput = sc.nextInt();
+			if (userInput == 1) {
+				System.out.println("Your marks is: " + studentDetail.getString("s_marks"));
+				getUserInput(ad, studentId);
+			} else if (userInput == 2) {
+				printScoreCard(studentId);
+				getUserInput(ad,studentId);
+
+				mainLogin();
+			} else if (userInput == 3) {
+				Launch.mainMenu(ad);
+				return;
+			} else if (userInput == 4) {
+				System.out.println("Exiting the Application.");
+				System.out.println("Thanks for visiting us.");
+				System.exit(0);
+			} else {
+				System.out.println("wrong input");
+				System.exit(0);
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static void mainLogin() {
+		Scanner sc = new Scanner(System.in);
+		Admin ad = new Admin();
+		Student stud = login();
+
+		if (stud != null) {
+			System.out.println("---Student Logged in---");
+			getUserInput(ad, stud.getUsername());
+		} else {
+			System.out.println("Authentication Failed!");
+			System.out.println();
+			System.out.println("Do you want to try again? Yes/No");
+			String tryAgain = sc.next();
+			if (tryAgain.equalsIgnoreCase("Yes")) {
+				mainLogin();
+			} else {
+				Launch.mainMenu(ad);
+			}
+		}
+
 	}
 
 	static void printScoreCard(String studentId) {
 //		Course c = ad.courses.get(enrolledCourseId);
 		try {
-			String sql = "select * from student where course_id = ?";
+			String sql = "select * from student where s_username = ?";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, studentId);
 			ResultSet studentDetail = pstmt.executeQuery();
 			studentDetail.next();
 
-			String sql2 = "select * from course where course_id = ?";
+			String sql2 = "select * from course where c_id = ?";
 			PreparedStatement pstmt2 = con.prepareStatement(sql2);
-			pstmt.setString(1, studentDetail.getString("course_id"));
-			ResultSet courseDetail = pstmt.executeQuery();
+			pstmt2.setString(1, studentDetail.getString("course_id"));
+			ResultSet courseDetail = pstmt2.executeQuery();
 			courseDetail.next();
 
 			String sql3 = "select * from professor where course_id = ?";
 			PreparedStatement pstmt3 = con.prepareStatement(sql3);
 			pstmt3.setString(1, studentDetail.getString("course_id"));
-			ResultSet professorDetail = pstmt.executeQuery();
-			courseDetail.next();
+			ResultSet professorDetail = pstmt3.executeQuery();
+			professorDetail.next();
 
 			String sname;
 
