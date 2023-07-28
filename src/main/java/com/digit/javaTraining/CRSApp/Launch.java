@@ -52,7 +52,7 @@ public class Launch {
 		} else {
 			System.out.println("\033[1m\033[31mInvalid Input!\033[0m\033[0m");
 
-			System.out.println("Please try again...");
+			System.out.println("\033[0mPlease try again...\033[1m");
 			mainMenu(ad);
 		}
 

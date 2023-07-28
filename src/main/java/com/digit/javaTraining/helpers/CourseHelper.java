@@ -18,10 +18,8 @@ public class CourseHelper {
 	public static void addCourse() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println();
-		System.out.println("*****************************");
-		System.out.println("           COURSES           ");
-		System.out.println("*****************************");
-		System.out.println("\n---Add Course---");
+		
+		System.out.println("\n---ADD COURSE---");
 		System.out.println("Enter ID of the course: ");
 		String id = sc.nextLine();
 
@@ -47,14 +45,14 @@ public class CourseHelper {
 			pstmt.setString(5, description);
 
 			int x = pstmt.executeUpdate();
-			System.out.println("Course Added Successfully...");
+			System.out.println("\033[32m\033[1mCourse Added Successfully...\033[0m\033[0m");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		System.out.println();
 		System.out.println("Course Details:");
-		System.out.println("--------------");
+		System.out.println("---------------");
 		System.out.println("Id:             " + id);
 		System.out.println("Name:           " + name);
 		System.out.println("Price:          Rs." + price);
@@ -70,7 +68,7 @@ public class CourseHelper {
 		} else if (userInput.equalsIgnoreCase("no")) {
 			return;
 		} else {
-			System.out.println("invalid Input");
+			System.out.println("\033[1m\033[31minvalid Input\033[0m\033[32m");
 		}
 		
 		

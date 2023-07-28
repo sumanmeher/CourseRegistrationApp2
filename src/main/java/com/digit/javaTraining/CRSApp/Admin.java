@@ -34,7 +34,7 @@ public class Admin {
 	static void printAdminMenu() {
 		System.out.println();
 		System.out.println("-----------------------------");
-		System.out.println("          ADMIN MENU          ");
+		System.out.println("        | ADMIN MENU |       ");
 		System.out.println("-----------------------------");
 		System.out.println("1. Add Course");
 		System.out.println("2. Add Professor");
@@ -80,7 +80,7 @@ public class Admin {
 			break;
 		default:
 			System.out.println("\033[1m\033[31mInvalid Input!\033[0m\033[0m");
-			System.out.println("Please try again...");
+			System.out.println("\033[0mPlease try again...\033[1m");
 			adminMenu(ad);
 		}
 	}

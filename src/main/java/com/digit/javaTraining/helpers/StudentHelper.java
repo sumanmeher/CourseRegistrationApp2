@@ -22,10 +22,7 @@ public class StudentHelper {
 		try {
 			Admin ad = new Admin();
 			Scanner sc = new Scanner(System.in);
-			System.out.println("-----------------------------");
-			System.out.println("           STUDENT           ");
-			System.out.println("-----------------------------");
-			System.out.println("\n---Add Student---");
+			System.out.println("\n---ADD STUDENT---");
 			System.out.println("Enter the name of the Student");
 			String name = sc.next();
 			System.out.println("Enter the username:");
@@ -34,7 +31,7 @@ public class StudentHelper {
 			String pass = sc.next();
 			System.out.println("Enter the Age:");
 			int age = sc.nextInt();
-			String sql = "insert into students (s_username, s_name, s_password, s_age) values(?,?,?,?)";
+			String sql = "insert into student (s_username, s_name, s_password, s_age) values(?,?,?,?)";
 			
 				PreparedStatement pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, userName);
@@ -42,13 +39,13 @@ public class StudentHelper {
 				pstmt.setString(3, pass);
 				pstmt.setInt(4, age);
 				int x = pstmt.executeUpdate();
-				System.out.println("inserted");
+				System.out.println("\033[32m\033[1mStudent Added Successfully...\033[0m\033[0m");
 			
 
 			System.out.println("Select a course to Read");
 			ArrayList<String> arrList = CourseHelper.showAllCourses();
 			if (arrList.size() <= 0) {
-				System.out.println("No course is created yet.");
+				System.out.println("\033[1m\033[31mNo course is created yet.\033[0m\033[0m");
 				Admin.adminMenu(ad);
 			}
 			System.out.println("Select a option:");
@@ -65,12 +62,12 @@ public class StudentHelper {
 
 		} catch (InputMismatchException ime) {
 			System.out.println("\033[1m\033[31mSomething went wrong in Database!...\033[0m\033[0m");
-			System.out.println("Please try again...");
+			System.out.println("\033[0mPlease try again...\033[1m");
 			addStudent();
 		}catch (SQLException e) {
 			
 			System.out.println("\033[1m\033[31mSomething went wrong in Database!...\033[0m\033[0m");
-			System.out.println("Please try again...");
+			System.out.println("\033[0mPlease try again...\033[1m");
 			addStudent();
 		}catch(Exception e) {
 			Admin ad = new Admin();
@@ -138,7 +135,7 @@ public class StudentHelper {
 
 	static void printStudentSection() {
 		System.out.println("-----------------------------");
-		System.out.println("         STUDENT MENU        ");
+		System.out.println("       | STUDENT MENU |      ");
 		System.out.println("-----------------------------");
 		System.out.println("1. Check score");
 		System.out.println("2. Get Report");
