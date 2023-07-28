@@ -102,23 +102,23 @@ public class ProfessorHelper {
 		if (pr != null) {
 			System.out.println("\033[32m\033[1mAuthenticated...\033[0m\033[0m");
 			try {
-				if(pr.getCourse_id()==null) {
+				if (pr.getCourse_id() == null) {
 					System.out.println("You are not assigned to any Course yet.");
 					assignProfessorMain(pr.getUsername());
-					
+
 					System.out.println("Successfully Assigned the Course.");
 					System.out.println("First teach the students then Login again to mark them.");
 					Launch.mainMenu(ad);
 					System.exit(0);
 				}
-				
+
 				String sql = "select * from course where c_id = ?";
 				PreparedStatement pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, pr.getCourse_id());
 				ResultSet course = pstmt.executeQuery();
 				course.next();
 				System.out.println("You are teaching " + course.getString("c_name") + "\n");
-				
+
 				System.out.println("-----------------------------");
 				System.out.println("      | PROFESSOR MENU |     ");
 				System.out.println("-----------------------------");
@@ -138,7 +138,7 @@ public class ProfessorHelper {
 				e.printStackTrace();
 			}
 
-		}else {
+		} else {
 			System.out.println("\033[1m\033[31mAuthentication Failed!...\033[0m\033[0m");
 			System.out.println();
 			System.out.println("Do you want to try again? Yes/No");
@@ -156,16 +156,8 @@ public class ProfessorHelper {
 		Scanner sc = new Scanner(System.in);
 		Admin ad = new Admin();
 
-		System.out.println("Select a student to give marks:");
-		int count = 1;
-		while (count <= stuIdList.size()) {
-			System.out.println(count + ") " + stuIdList.get(count - 1));
-			count++;
-		}
 
-		System.out.println(count+") Go to Main Menu");
-
-		if(stuIdList.size()<=0) {
+		if (stuIdList.size() <= 0) {
 			System.out.println("\033[1m\033[31mNo student found\033[0m\033[0m");
 			System.out.println("Login with another user? Yes/No");
 			String tryAgain = sc.next();
@@ -176,7 +168,7 @@ public class ProfessorHelper {
 			}
 			return;
 		}
-			
+
 		System.out.println("Select a student to give marks:");
 		int count = 1;
 		while (count <= stuIdList.size()) {
@@ -184,9 +176,7 @@ public class ProfessorHelper {
 			count++;
 		}
 
-		System.out.println(count+") Goto Main Menu");
-		
-		
+		System.out.println(count + ") Goto Main Menu");
 
 		System.out.println("select a student to mark:");
 		int studentNo = sc.nextInt();
@@ -197,7 +187,7 @@ public class ProfessorHelper {
 		}
 
 		String studentId = stuIdList.get(studentNo - 1);
-		System.out.println("Give marks to " + studentId+":");
+		System.out.println("Give marks to " + studentId + ":");
 		int marks = sc.nextInt();
 
 		try {
@@ -276,7 +266,7 @@ public class ProfessorHelper {
 		}
 
 	}
-	
+
 	static void assignProfessorMain(String professorId) {
 		Scanner sc = new Scanner(System.in);
 		Admin ad = new Admin();
