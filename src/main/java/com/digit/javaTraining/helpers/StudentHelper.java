@@ -126,6 +126,7 @@ public class StudentHelper {
 		System.out.println("3. Goto Main Menu");
 		System.out.println("4. Exit");
 	}
+//	hj
 
 	static void getUserInput(Admin ad, String studentId) {
 		try {
