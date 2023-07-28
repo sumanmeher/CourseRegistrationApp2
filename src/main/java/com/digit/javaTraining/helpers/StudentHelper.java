@@ -38,22 +38,18 @@ public class StudentHelper {
 				pstmt.setString(3, pass);
 				pstmt.setInt(4, age);
 				int x = pstmt.executeUpdate();
-<<<<<<< HEAD
-				System.out.println("Student Added Successfully..");
-=======
 				System.out.println("\033[32m\033[1mStudent Added Successfully...\033[0m\033[0m");
->>>>>>> branch 'main' of https://github.com/sumanmeher/Project-3_CourseRegistrationApp2.git
 			
 
-			System.out.println("Select a course to Read");
-			ArrayList<String> arrList = CourseHelper.showAllCourses();
-			if (arrList.size() <= 0) {
-				System.out.println("\033[1m\033[31mNo course is created yet.\033[0m\033[0m");
-				Admin.adminMenu(ad);
-			}
-			System.out.println("Select a option:");
-			int inp = sc.nextInt();
-			asignCourse(userName, arrList.get(inp - 1));
+//			System.out.println("Select a course to Read");
+//			ArrayList<String> arrList = CourseHelper.showAllCourses();
+//			if (arrList.size() <= 0) {
+//				System.out.println("\033[1m\033[31mNo course is created yet.\033[0m\033[0m");
+//				Admin.adminMenu(ad);
+//			}
+//			System.out.println("Select a option:");
+//			int inp = sc.nextInt();
+			asignCourse(userName);
 			
 			System.out.println("Do you want to add more Students (yes/no)");
 			String tryAgain = sc.next();
@@ -107,8 +103,21 @@ public class StudentHelper {
 		return null;
 	}
 
-	static public void asignCourse(String student_id, String course_id) {
+	static public void asignCourse(String student_id) {
+		Admin ad = new Admin();
+		Scanner sc = new Scanner(System.in);
 		try {
+			System.out.println("Select a course to Read");
+			ArrayList<String> arrList = CourseHelper.showAllCourses();
+			if (arrList.size() <= 0) {
+				System.out.println("\033[1m\033[31mNo course is created yet.\033[0m\033[0m");
+				Admin.adminMenu(ad);
+			}
+			System.out.println("Select a option:");
+			int inp = sc.nextInt();
+			
+			String course_id = arrList.get(inp - 1);
+			
 			String sql = "update student set course_id = ? where s_username = ?";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, course_id);
@@ -116,6 +125,10 @@ public class StudentHelper {
 			pstmt.executeUpdate();
 			System.out.println("Course Assigned Sucessfully..");
 
+		} catch (InputMismatchException ime) {
+			System.out.println("\033[1m\033[31mInvalid Input!...\033[0m\033[0m");
+			System.out.println("\033[1mPlease try again...\033[0m");
+			asignCourse(student_id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -67,7 +67,7 @@ public class Admin {
 			adminMenu(ad);
 			break;
 		case 4:
-			ProfessorHelper.showAllProfessor();
+			CourseHelper.showAllCourses();
 			adminMenu(ad);
 			break;
 		case 5:
