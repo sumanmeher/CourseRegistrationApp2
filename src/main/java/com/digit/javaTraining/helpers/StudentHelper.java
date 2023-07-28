@@ -120,7 +120,7 @@ public class StudentHelper {
 	}
 
 	static void printStudentSection() {
-		System.out.println("----Student section----");
+		System.out.println("----Student section---- ");
 		System.out.println("1. Check score");
 		System.out.println("2. Get Report");
 		System.out.println("3. Goto Main Menu");
