@@ -10,6 +10,7 @@ public class Launch {
 	public static void main(String[] args) {
 		DatabaseConnection db = new DatabaseConnection();
 //		CourseHelper.showUnassignedCourse();
+//		ProfessorHelper.mainLogin();
 //		System.exit(0);
 		
 		System.out.println("Welcome to Digital Courses! ");
@@ -39,7 +40,7 @@ public class Launch {
 			adminAuth(ad);
 
 		} else if (userInput == 2) {
-			ProfessorHelper.login();
+			ProfessorHelper.mainLogin();
 
 		} else if (userInput == 3) {
 			StudentHelper.login();
