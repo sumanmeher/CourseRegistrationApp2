@@ -22,10 +22,7 @@ public class ProfessorHelper {
 		Scanner sc = new Scanner(System.in);
 		try {
 			System.out.println();
-			System.out.println("-----------------------------");
-			System.out.println("          PROFESSOR          ");
-			System.out.println("-----------------------------");
-			System.out.println("\n---Add Professor---");
+			System.out.println("\n---ADD PROFESSOR---");
 			System.out.println("Enter the name of the Professor");
 			String name = sc.next();
 			System.out.println("Enter the username:");
@@ -42,9 +39,9 @@ public class ProfessorHelper {
 			pstmt.setString(3, pass);
 			pstmt.setInt(4, age);
 			int x = pstmt.executeUpdate();
-			System.out.println("Professor Added Successfully.");
-			assignProfessorMain(userName);
 
+			System.out.println("\033[32m\033[1mProfessor Added Successfully...\033[0m\033[0m");
+			assignProfessorMain(userName);
 			System.out.println("Do you want to add more Professor (yes/no)");
 			String tryAgain = sc.next();
 
@@ -56,7 +53,7 @@ public class ProfessorHelper {
 		} catch (InputMismatchException e) {
 			System.out.println("\033[1m\033[31mWrong Data Inserted!...\033[0m\033[0m");
 
-			System.out.println("Please try again...");
+			System.out.println("\033[0mPlease try again...\033[1m");
 			addProfessor();
 		} catch (SQLException e) {
 			System.out.println("\033[1m\033[31mDatabase Error Occured!...\033[0m\033[0m");
@@ -123,7 +120,7 @@ public class ProfessorHelper {
 				System.out.println("You are teaching " + course.getString("c_name") + "\n");
 				
 				System.out.println("-----------------------------");
-				System.out.println("        PROFESSOR MENU       ");
+				System.out.println("      | PROFESSOR MENU |     ");
 				System.out.println("-----------------------------");
 
 				String sql2 = "select * from student where course_id = ?";
@@ -216,7 +213,7 @@ public class ProfessorHelper {
 	}
 
 	static public void showAllProfessor() {
-		System.out.println("---List of Professors--");
+		System.out.println("\033[0m---List of Professors--\033[1m");
 		String sql = "select p_username, p_name, p_age from professor";
 		try {
 			Statement stmt = con.createStatement();
