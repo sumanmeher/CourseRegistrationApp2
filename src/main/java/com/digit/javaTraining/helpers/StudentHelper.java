@@ -31,26 +31,18 @@ public class StudentHelper {
 			System.out.println("Enter the Age:");
 			int age = sc.nextInt();
 			String sql = "insert into student (s_username, s_name, s_password, s_age) values(?,?,?,?)";
-			
-				PreparedStatement pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, userName);
-				pstmt.setString(2, name);
-				pstmt.setString(3, pass);
-				pstmt.setInt(4, age);
-				int x = pstmt.executeUpdate();
-				System.out.println("\033[32m\033[1mStudent Added Successfully...\033[0m\033[0m");
-			
 
-//			System.out.println("Select a course to Read");
-//			ArrayList<String> arrList = CourseHelper.showAllCourses();
-//			if (arrList.size() <= 0) {
-//				System.out.println("\033[1m\033[31mNo course is created yet.\033[0m\033[0m");
-//				Admin.adminMenu(ad);
-//			}
-//			System.out.println("Select a option:");
-//			int inp = sc.nextInt();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userName);
+			pstmt.setString(2, name);
+			pstmt.setString(3, pass);
+			pstmt.setInt(4, age);
+			int x = pstmt.executeUpdate();
+
+			System.out.println("\033[32m\033[1mStudent Added Successfully...\033[0m\033[0m");
+
 			asignCourse(userName);
-			
+
 			System.out.println("Do you want to add more Students (yes/no)");
 			String tryAgain = sc.next();
 
@@ -64,12 +56,12 @@ public class StudentHelper {
 			System.out.println("\033[1m\033[31mInvalid Input!...\033[0m\033[0m");
 			System.out.println("\033[1mPlease try again...\033[0m");
 			addStudent();
-		}catch (SQLException e) {
-			
+		} catch (SQLException e) {
+
 			System.out.println("\033[1m\033[31mSomething went wrong in Database!...\033[0m\033[0m");
 			System.out.println("\033[1mPlease try again...\033[0m");
 			addStudent();
-		}catch(Exception e) {
+		} catch (Exception e) {
 			Admin ad = new Admin();
 			System.out.println("\033[1m\033[31mSomething went wrong in Database!...\033[0m\033[0m");
 			Admin.adminMenu(ad);
@@ -92,9 +84,9 @@ public class StudentHelper {
 			if (pass.equals(result.getString("s_password"))) {
 				Student stud = new Student(result.getString("s_name"), result.getString("s_username"),
 						result.getString("s_password"), result.getInt("s_age"));
-				
+
 				return stud;
-				
+
 			}
 			return null;
 		} catch (SQLException e) {
@@ -160,7 +152,7 @@ public class StudentHelper {
 		System.out.println("3. Goto Main Menu");
 		System.out.println("4. Exit");
 	}
-	
+
 	static public void showAllStudent() {
 		System.out.println("---List of Students--");
 		String sql = "select s_username, s_name, s_age from student";

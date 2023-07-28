@@ -156,6 +156,7 @@ public class ProfessorHelper {
 		Scanner sc = new Scanner(System.in);
 		Admin ad = new Admin();
 
+
 		if (stuIdList.size() <= 0) {
 			System.out.println("\033[1m\033[31mNo student found\033[0m\033[0m");
 			System.out.println("Login with another user? Yes/No");
