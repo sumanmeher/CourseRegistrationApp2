@@ -9,15 +9,9 @@ import com.digit.javaTraining.helpers.StudentHelper;
 public class Launch {
 	public static void main(String[] args) throws Exception {
 		DatabaseConnection db = new DatabaseConnection();
-//		CourseHelper.showUnassignedCourse();
-//		ProfessorHelper.mainLogin()df;
-//		System.exit(0);
-
-		System.out.println("Welcome to Digital Courses! ");
-
 		Admin ad = new Admin();
-		mainMenu(ad);
-
+		System.out.println("Welcome to Digital Courses! ");
+		mainMenu();
 	}
 
 	static void printMainMenu() {
@@ -32,14 +26,14 @@ public class Launch {
 
 	}
 
-	static public void mainMenu(Admin ad) {
+	static public void mainMenu() {
 		try {
 			Scanner sc = new Scanner(System.in);
 			printMainMenu();
 			System.out.println("Select an option: ");
 			int userInput = sc.nextInt();
 			if (userInput == 1) {
-				adminAuth(ad);
+				adminAuth();
 
 			} else if (userInput == 2) {
 				ProfessorHelper.mainLogin();
@@ -55,31 +49,31 @@ public class Launch {
 				System.out.println("\033[1m\033[31mInvalid Input!\033[0m\033[0m");
 
 				System.out.println("\033[1mPlease try again...\033[0m");
-				mainMenu(ad);
+				mainMenu();
 			}
 		} catch (InputMismatchException ime) {
 			System.out.println("\033[1m\033[31mInvalid Input!...\033[0m\033[0m");
 			System.out.println("\033[1mPlease try again...\033[0m");
-			mainMenu(ad);
+			mainMenu();
 		}
 
 	}
 
-	static void adminAuth(Admin ad) {
+	static void adminAuth() {
 		Scanner sc = new Scanner(System.in);
-		boolean isAuth = ad.checkUsernamePassword();
+		boolean isAuth = Admin.checkUsernamePassword();
 		if (isAuth) {
 			System.out.println("\033[32m\033[1mAuthenticated...\033[0m\033[0m");
-			Admin.adminMenu(ad);
+			Admin.adminMenu();
 		} else {
 			System.out.println("\033[1m\033[31mAuthentication Failed!\033[0m\033[0m");
 			System.out.println();
 			System.out.println("Do you want to try again? Yes/No");
 			String tryAgain = sc.next();
 			if (tryAgain.equalsIgnoreCase("Yes")) {
-				adminAuth(ad);
+				adminAuth();
 			} else {
-				mainMenu(ad);
+				mainMenu();
 			}
 		}
 	}

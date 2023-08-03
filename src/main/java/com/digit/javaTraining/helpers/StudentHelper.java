@@ -49,7 +49,7 @@ public class StudentHelper {
 			if (tryAgain.equalsIgnoreCase("Yes")) {
 				addStudent();
 			} else {
-				Admin.adminMenu(ad);
+				Admin.adminMenu();
 			}
 
 		} catch (InputMismatchException ime) {
@@ -62,9 +62,9 @@ public class StudentHelper {
 			System.out.println("\033[1mPlease try again...\033[0m");
 			addStudent();
 		} catch (Exception e) {
-			Admin ad = new Admin();
+			
 			System.out.println("\033[1m\033[31mSomething went wrong in Database!...\033[0m\033[0m");
-			Admin.adminMenu(ad);
+			Admin.adminMenu();
 		}
 	}
 
@@ -80,9 +80,11 @@ public class StudentHelper {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, username);
 			ResultSet result = pstmt.executeQuery();
-			result.next();
+			if(!result.next()) {
+				return null;
+			}
 			if (pass.equals(result.getString("s_password"))) {
-				Student stud = new Student(result.getString("s_name"), result.getString("s_username"),
+				Student stud = new Student(result.getString("s_username"), result.getString("s_name"),
 						result.getString("s_password"), result.getInt("s_age"));
 
 				return stud;
@@ -96,14 +98,13 @@ public class StudentHelper {
 	}
 
 	static public void asignCourse(String student_id) {
-		Admin ad = new Admin();
 		Scanner sc = new Scanner(System.in);
 		try {
 			System.out.println("Select a course to Read");
 			ArrayList<String> arrList = CourseHelper.showAllCourses();
 			if (arrList.size() <= 0) {
 				System.out.println("\033[1m\033[31mNo course is created yet.\033[0m\033[0m");
-				Admin.adminMenu(ad);
+				Admin.adminMenu();
 			}
 			System.out.println("Select a option:");
 			int inp = sc.nextInt();
@@ -168,7 +169,8 @@ public class StudentHelper {
 		}
 	}
 
-	static void getUserInput(Admin ad, String studentId) {
+	static void getUserInput(String studentId) {
+		
 		try {
 			String sql = "select * from student where S_Username = ?";
 			PreparedStatement pstmt = con.prepareStatement(sql);
@@ -182,14 +184,13 @@ public class StudentHelper {
 			int userInput = sc.nextInt();
 			if (userInput == 1) {
 				System.out.println("Your marks is: " + studentDetail.getString("s_marks"));
-				getUserInput(ad, studentId);
+				getUserInput(studentId);
 			} else if (userInput == 2) {
 				printScoreCard(studentId);
-				getUserInput(ad, studentId);
-
+				getUserInput(studentId);
 				mainLogin();
 			} else if (userInput == 3) {
-				Launch.mainMenu(ad);
+				Launch.mainMenu();
 				return;
 			} else if (userInput == 4) {
 				System.out.println("Exiting the Application.");
@@ -202,27 +203,26 @@ public class StudentHelper {
 		} catch (Exception e) {
 			System.out.println("\033[1m\033[31mWrong Input!...\033[0m\033[0m");
 			System.out.println("Select correct option");
-			getUserInput(ad, studentId);
+			getUserInput(studentId);
 		}
 	}
 
 	public static void mainLogin() {
 		Scanner sc = new Scanner(System.in);
-		Admin ad = new Admin();
 		Student stud = login();
 
 		if (stud != null) {
 			System.out.println("\033[32m\033[1mAuthenticated...\033[0m\033[0m");
-			getUserInput(ad, stud.getUsername());
+			getUserInput(stud.getUsername());
 		} else {
-			System.out.println("\033[1m\033[31mInvalid Input!\033[0m\033[0m");
+			System.out.println("\033[1m\033[31mInvalid Credentials!\033[0m\033[0m");
 			System.out.println();
 			System.out.println("Do you want to try again? Yes/No");
 			String tryAgain = sc.next();
 			if (tryAgain.equalsIgnoreCase("Yes")) {
 				mainLogin();
 			} else {
-				Launch.mainMenu(ad);
+				Launch.mainMenu();
 			}
 		}
 
@@ -259,42 +259,32 @@ public class StudentHelper {
 			String sdescription;
 			System.out.print("*");
 			sdescription = String.format("containing %s", courseDetail.getString("Description"));
+			
+			String sgrade;
+			sgrade = String.format("with a grade of %s", studentDetail.getString("s_marks") + "%");
+			
+			String pName;
+			pName = String.format("%s", professorDetail.getString("p_name"));
 
 			System.out.println("****************************************************");
 			System.out.println("*                                                    *");
 			System.out.println("*         Certificate of Course Completion           *");
 			System.out.println("*                                                    *");
 			System.out.println("*              This is to certify that               *");
-
 			System.out.println("*                                                    *");
-			System.out.print("*");
-			centerAlign(sname);
-			System.out.print("*");
-
+			System.out.print(  "*");        centerAlign(sname);  System.out.println("*");
 			System.out.println("*                                                    *");
 			System.out.println("*            has successfully completed              *");
 			System.out.println("*                                                    *");
-
-			System.out.print("*");
-			centerAlign(sdurationAndCName);
-			System.out.print("*");
-
+			System.out.print( "*");centerAlign(sdurationAndCName);System.out.println("*");
 			System.out.println("*                                                    *");
-
-			System.out.print("*");
-			centerAlign(sdescription);
-			System.out.print("*");
-
+			System.out.print("*");   centerAlign(sdescription);  System.out.println("*");
 			System.out.println("*                                                    *");
-			String sgrade;
-			sgrade = String.format("with a grade of %s", studentDetail.getString("s_marks") + "%");
-			centerAlign(sgrade);
+			System.out.print( "*");      centerAlign(sgrade);    System.out.println("*");
 			System.out.println("*                                                    *");
 			System.out.println("*                under the guidance of               *");
 			System.out.println("*                                                    *");
-			String pName;
-			pName = String.format("%s", professorDetail.getString("p_name"));
-			centerAlign(pName);
+			System.out.print( "*");      centerAlign(pName);     System.out.println("*");
 			System.out.println("*                                                    *");
 			System.out.println("*                                                    *");
 			System.out.println("******************************************************");
@@ -312,7 +302,7 @@ public class StudentHelper {
 		// non-negative totalSpaces value
 		if (totalSpaces >= 0) {
 			String alignedText = " ".repeat(leftSpaces) + text + " ".repeat(rightSpaces);
-			System.out.println(alignedText);
+			System.out.print(alignedText);
 		} else {
 			// if text is already longer than 50 characters, print as it is
 			System.out.println(text);

@@ -18,13 +18,12 @@ public class ProfessorHelper {
 	static Connection con = DatabaseConnection.con;
 
 	public static void addProfessor() {
-		Admin ad = new Admin();
 		Scanner sc = new Scanner(System.in);
 		try {
 			System.out.println();
 			System.out.println("\n---ADD PROFESSOR---");
 			System.out.println("Enter the name of the Professor");
-			String name = sc.next();
+			String name = sc.nextLine();
 			System.out.println("Enter the username:");
 			String userName = sc.next();
 			System.out.println("Enter the Password");
@@ -48,7 +47,7 @@ public class ProfessorHelper {
 			if (tryAgain.equalsIgnoreCase("Yes")) {
 				addProfessor();
 			} else {
-				Admin.adminMenu(ad);
+				Admin.adminMenu();
 			}
 		} catch (InputMismatchException e) {
 			System.out.println("\033[1m\033[31mWrong Data Inserted!...\033[0m\033[0m");
@@ -58,15 +57,14 @@ public class ProfessorHelper {
 		} catch (SQLException e) {
 			System.out.println("\033[1m\033[31mDatabase Error Occured!...\033[0m\033[0m");
 			System.out.println("Redirecting to Main Menu...");
-			Admin.adminMenu(ad);
+			Admin.adminMenu();
 		} catch (Exception e) {
 			System.out.println("\033[1m\033[31mSomething Went Wrong!...\033[0m\033[0m");
-			Launch.mainMenu(ad);
+			Launch.mainMenu();
 		}
 	}
 
 	static public Professor login() {
-		Admin ad = new Admin();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("\n---PROFESSOR LOGIN---");
 		System.out.println("Enter Your Username");
@@ -90,14 +88,13 @@ public class ProfessorHelper {
 		} catch (SQLException e) {
 			System.out.println("\033[1m\033[31mDatabase Error Occured!...\033[0m\033[0m");
 			System.out.println("Redirecting to Main Menu...");
-			Admin.adminMenu(ad);
+			Admin.adminMenu();
 		}
 		return null;
 	}
 
 	public static void mainLogin() {
 		Scanner sc = new Scanner(System.in);
-		Admin ad = new Admin();
 		Professor pr = login();
 		if (pr != null) {
 			System.out.println("\033[32m\033[1mAuthenticated...\033[0m\033[0m");
@@ -108,7 +105,7 @@ public class ProfessorHelper {
 
 					System.out.println("Successfully Assigned the Course.");
 					System.out.println("First teach the students then Login again to mark them.");
-					Launch.mainMenu(ad);
+					Launch.mainMenu();
 					System.exit(0);
 				}
 
@@ -146,7 +143,7 @@ public class ProfessorHelper {
 			if (tryAgain.equalsIgnoreCase("Yes")) {
 				mainLogin();
 			} else {
-				Launch.mainMenu(ad);
+				Launch.mainMenu();
 			}
 		}
 
@@ -154,8 +151,6 @@ public class ProfessorHelper {
 
 	static void addMarks(ArrayList<String> stuIdList) {
 		Scanner sc = new Scanner(System.in);
-		Admin ad = new Admin();
-
 
 		if (stuIdList.size() <= 0) {
 			System.out.println("\033[1m\033[31mNo student found\033[0m\033[0m");
@@ -164,7 +159,7 @@ public class ProfessorHelper {
 			if (tryAgain.equalsIgnoreCase("Yes")) {
 				mainLogin();
 			} else {
-				Launch.mainMenu(ad);
+				Launch.mainMenu();
 			}
 			return;
 		}
@@ -182,7 +177,7 @@ public class ProfessorHelper {
 		int studentNo = sc.nextInt();
 
 		if (studentNo == stuIdList.size() + 1) {
-			Launch.mainMenu(ad);
+			Launch.mainMenu();
 			System.exit(0);
 		}
 
@@ -207,7 +202,7 @@ public class ProfessorHelper {
 		if (tryAgain.equalsIgnoreCase("Yes")) {
 			addMarks(stuIdList);
 		} else {
-			Launch.mainMenu(ad);
+			Launch.mainMenu();
 		}
 	}
 
@@ -260,6 +255,8 @@ public class ProfessorHelper {
 			pstmt.setString(1, courseId);
 			pstmt.setString(2, professorId);
 			pstmt.executeUpdate();
+			System.out.println("\033[32m\033[1mCourse Assigned Successfully...\033[0m\033[0m");
+			
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -269,13 +266,13 @@ public class ProfessorHelper {
 
 	static void assignProfessorMain(String professorId) {
 		Scanner sc = new Scanner(System.in);
-		Admin ad = new Admin();
+		
 		System.out.println("\nSelect a course to Teach");
 
 		ArrayList<String> arrList = CourseHelper.showUnassignedCourse();
 		if (arrList.size() <= 0) {
 			System.out.println("No course is left to assign");
-			Admin.adminMenu(ad);
+			Admin.adminMenu();
 		}
 		System.out.println("Select a option:");
 		int inp = sc.nextInt();

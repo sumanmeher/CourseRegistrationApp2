@@ -8,15 +8,15 @@ import com.digit.javaTraining.helpers.ProfessorHelper;
 import com.digit.javaTraining.helpers.StudentHelper;
 
 public class Admin {
-	String username;
-	String password;
+	static String username;
+	static String password;
 
 	public Admin() {
 		this.username = "admin";
 		this.password = "Admin";
 	}
 
-	public boolean checkUsernamePassword() {
+	static public boolean checkUsernamePassword() {
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println();
@@ -27,7 +27,7 @@ public class Admin {
 		System.out.println("Enter Admin Password");
 		String pass = sc.next();
 
-		if (name.equals(username) && pass.equals(this.password))
+		if (name.equals(Admin.username) && pass.equals(Admin.password))
 			return true;
 		return false;
 	}
@@ -46,10 +46,9 @@ public class Admin {
 		System.out.println("7. Go to Main Menu");
 	}
 
-	static public void adminMenu(Admin ad) {
+	static public void adminMenu() {
 		try {
 		Scanner sc = new Scanner(System.in);
-		Course c;
 
 		printAdminMenu();
 		System.out.println("Select an option:");
@@ -58,39 +57,39 @@ public class Admin {
 		switch(userInput) {
 		case 1:
 			CourseHelper.addCourse();
-			adminMenu(ad);
+			adminMenu();
 			break;
 		case 2:
 			ProfessorHelper.addProfessor();
-			adminMenu(ad);
+			adminMenu();
 			break;
 		case 3:
 			StudentHelper.addStudent();
-			adminMenu(ad);
+			adminMenu();
 			break;
 		case 4:
 			CourseHelper.showAllCourses();
-			adminMenu(ad);
+			adminMenu();
 			break;
 		case 5:
 			StudentHelper.showAllStudent();
-			adminMenu(ad);
+			adminMenu();
 			break;
 		case 6:
 			ProfessorHelper.showAllProfessor();
-			adminMenu(ad);
+			adminMenu();
 			break;
 		case 7:
-			Launch.mainMenu(ad);
+			Launch.mainMenu();
 		default:
 			System.out.println("\033[1m\033[31mInvalid Input!\033[0m\033[0m");
 			System.out.println("\033[1mPlease try again...\033[0m");
-			adminMenu(ad);
+			adminMenu();
 		}
 		}catch(InputMismatchException ime) {
 			System.out.println("\033[1m\033[31mInvalid Input!\033[0m\033[0m");
 			System.out.println("\033[1mPlease try again...\033[0m");
-			adminMenu(ad);
+			adminMenu();
 		}
 	}
 

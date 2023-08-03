@@ -29,7 +29,7 @@ public class CourseHelper {
 		System.out.println("Enter the Duration of the course:  ");
 		String duration = sc.nextLine();
 
-		System.out.println("Enter the Content of the course using comma (,): ");
+		System.out.println("Enter the Description: ");
 		String description = sc.nextLine();
 
 		System.out.println("Enter the Price of the course: ");
@@ -76,7 +76,7 @@ public class CourseHelper {
 	}
 	static public ArrayList<String> showAllCourses() {
 		ArrayList<String> arrList = new ArrayList<String>();
-		System.out.println("---List of Courses--");
+		System.out.println("\n---List of Courses--");
 		String sql = "select C_id, C_name, Price, Duration, Description from course";
 		try {
 			Statement stmt = con.createStatement();
@@ -84,7 +84,8 @@ public class CourseHelper {
 			int count=1;
 			while(result.next()) {
 				String courseId = result.getString("c_id");
-				System.out.println(count++ +") "+courseId);
+				String courseName = result.getString("c_name");
+				System.out.println(count++ +") "+courseName);
 				arrList.add(courseId);
 			}
 		} catch (SQLException e) {
@@ -120,7 +121,8 @@ public class CourseHelper {
 			int count=1;
 			while(result.next()) {
 				String  courseId = result.getString("c_id");
-				System.out.println(count++ +") "+courseId);
+				String courseName = result.getString("c_name");
+				System.out.println(count++ +") "+courseName);
 				arrList.add(courseId);
 			}
 		} catch (SQLException e) {
